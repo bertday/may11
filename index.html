@@ -1,0 +1,3167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Deal Builder · Powered by Breeze</title>
+<meta name="description" content="One Breeze paste. Five views of the deal. Deck, recap, coaching, strategy, forecast." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* HubSpot brand palette */
+  --hs-orange: #ff7a59;
+  --hs-orange-deep: #ff5c35;
+  --hs-orange-soft: #fff3ee;
+  --hs-orange-light: #ffe9e0;
+  --hs-navy: #213343;
+  --hs-text: #33475b;
+  --hs-text-2: #506e91;
+  --hs-text-mute: #7c98b6;
+  --hs-text-faint: #a3b8d0;
+  --hs-line: #cbd6e2;
+  --hs-line-soft: #eaf0f6;
+  --hs-line-faint: #f3f6fa;
+  --hs-bg: #f5f8fa;
+  --hs-card: #ffffff;
+  --hs-success: #00bda5;
+  --hs-success-bg: #e6fbf7;
+  --hs-error: #f2545b;
+  --hs-warn: #f7a700;
+  --hs-warn-bg: #fff7e6;
+  /* Type */
+  --sans: "Lexend Deca", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  /* Shape */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 999px;
+  /* Shadows */
+  --sh-card: 0 1px 2px rgba(33,51,67,0.04), 0 4px 12px rgba(33,51,67,0.06);
+  --sh-pop: 0 6px 20px rgba(33,51,67,0.1), 0 16px 40px rgba(33,51,67,0.1);
+  --sh-overlay: 0 24px 60px rgba(33,51,67,0.2), 0 8px 24px rgba(33,51,67,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--hs-bg);
+  color: var(--hs-text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+::selection { background: var(--hs-orange); color: #fff; }
+button { font-family: inherit; }
+
+/* ==================== HEADER ==================== */
+.app-header {
+  background: var(--hs-card);
+  border-bottom: 1px solid var(--hs-line-soft);
+  padding: 14px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.brand .sprocket {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.brand-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  letter-spacing: -0.01em;
+}
+.brand-prod {
+  font-size: 11px;
+  color: var(--hs-text-mute);
+  margin-top: 3px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.brand-prod .pill {
+  background: var(--hs-orange-soft);
+  color: var(--hs-orange-deep);
+  padding: 2px 7px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+.header-right { display: flex; align-items: center; gap: 12px; }
+.btn-back {
+  background: transparent;
+  border: 1px solid var(--hs-line);
+  color: var(--hs-text);
+  padding: 7px 13px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: all 0.12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-back:hover { border-color: var(--hs-text-mute); background: var(--hs-bg); }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all 0.12s;
+  line-height: 1;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn .ico { width: 15px; height: 15px; flex-shrink: 0; }
+.btn .arrow { transition: transform 0.18s; }
+.btn:hover:not(:disabled) .arrow { transform: translateX(3px); }
+.btn-primary { background: var(--hs-orange); color: #fff; }
+.btn-primary:hover:not(:disabled) {
+  background: var(--hs-orange-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255,122,89,0.32);
+}
+.btn-primary:disabled { background: var(--hs-text-mute); cursor: not-allowed; opacity: 0.6; }
+.btn-secondary {
+  background: var(--hs-card);
+  color: var(--hs-text);
+  border-color: var(--hs-line);
+}
+.btn-secondary:hover { border-color: var(--hs-text-mute); background: var(--hs-bg); }
+.btn-ghost { background: transparent; color: var(--hs-text-2); }
+.btn-ghost:hover { color: var(--hs-orange-deep); background: var(--hs-orange-soft); }
+.btn-lg { padding: 13px 22px; font-size: 15px; }
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hs-orange-deep);
+}
+
+/* ==================== VIEWS ==================== */
+.view { animation: viewIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cls-h { display: none !important; }
+
+/* ==================== HOME VIEW ==================== */
+.view-home { max-width: 920px; margin: 0 auto; padding: 56px 28px 80px; }
+.home-head { margin-bottom: 36px; }
+.home-h1 {
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 600;
+  color: var(--hs-navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 12px 0 14px;
+}
+.home-h1 .accent { color: var(--hs-orange-deep); }
+.home-sub {
+  font-size: 16px;
+  color: var(--hs-text-2);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* Three-step strip */
+.steps-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 28px 0 24px;
+}
+@media (max-width: 720px) { .steps-strip { grid-template-columns: 1fr; } }
+.step-card {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  position: relative;
+}
+.step-card .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--hs-text-faint);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 6px;
+}
+.step-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 4px;
+}
+.step-card p {
+  font-size: 12.5px;
+  color: var(--hs-text-2);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Prompt block */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hs-text-mute);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.section-label .badge {
+  background: var(--hs-navy);
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+.section-label .badge.done { background: var(--hs-success); }
+.section-label .badge.active { background: var(--hs-orange); }
+
+.prompt-block {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-bottom: 22px;
+  box-shadow: var(--sh-card);
+}
+.prompt-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--hs-line-faint);
+  border-bottom: 1px solid var(--hs-line-soft);
+  font-size: 11px;
+}
+.prompt-block-head .label {
+  color: var(--hs-text-mute);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.prompt-block-head .actions { display: flex; gap: 6px; }
+.mini-btn {
+  background: transparent;
+  border: 0;
+  color: var(--hs-text-2);
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--r-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--sans);
+  transition: all 0.12s;
+}
+.mini-btn:hover { background: var(--hs-line-soft); color: var(--hs-navy); }
+.mini-btn .ico { width: 12px; height: 12px; }
+.mini-btn.primary { background: var(--hs-orange); color: #fff; }
+.mini-btn.primary:hover { background: var(--hs-orange-deep); color: #fff; }
+.prompt-text {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--hs-text);
+  padding: 14px 16px;
+  max-height: 280px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.prompt-text.editable { outline: none; background: var(--hs-card); }
+.prompt-text::-webkit-scrollbar { width: 6px; }
+.prompt-text::-webkit-scrollbar-thumb { background: var(--hs-line); border-radius: 3px; }
+
+.where-breeze {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--hs-orange-soft);
+  border: 1px solid var(--hs-orange-light);
+  border-radius: var(--r-sm);
+  font-size: 12.5px;
+  color: var(--hs-text);
+  line-height: 1.55;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.where-breeze .ico { color: var(--hs-orange-deep); flex-shrink: 0; margin-top: 2px; }
+.where-breeze strong { color: var(--hs-navy); }
+.where-breeze kbd {
+  font-family: var(--sans);
+  font-size: 11px;
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line);
+  border-radius: var(--r-xs);
+  padding: 1px 5px;
+  color: var(--hs-text-2);
+  font-weight: 500;
+}
+
+.paste-area {
+  width: 100%;
+  background: var(--hs-card);
+  border: 1.5px solid var(--hs-line);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--hs-navy);
+  outline: none;
+  resize: vertical;
+  min-height: 160px;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.paste-area:focus {
+  border-color: var(--hs-orange);
+  box-shadow: 0 0 0 3px rgba(255,122,89,0.15);
+}
+.paste-area::placeholder { color: var(--hs-text-mute); font-family: var(--sans); }
+.paste-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--hs-text-mute);
+}
+.paste-status.ok { color: var(--hs-success); font-weight: 500; }
+.paste-status.bad { color: var(--hs-error); font-weight: 500; }
+
+/* Output buttons after paste */
+.outputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.output-tile {
+  background: var(--hs-card);
+  border: 1.5px solid var(--hs-line);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.12s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.output-tile:hover:not(:disabled) {
+  border-color: var(--hs-orange);
+  background: var(--hs-orange-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255,122,89,0.16);
+}
+.output-tile:disabled { opacity: 0.45; cursor: not-allowed; }
+.output-tile .ico-wrap {
+  width: 32px;
+  height: 32px;
+  background: var(--hs-orange-soft);
+  color: var(--hs-orange-deep);
+  border-radius: var(--r-sm);
+  display: grid;
+  place-items: center;
+}
+.output-tile:hover:not(:disabled) .ico-wrap { background: #fff; }
+.output-tile .title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+}
+.output-tile .desc {
+  font-size: 11.5px;
+  color: var(--hs-text-mute);
+  line-height: 1.45;
+}
+
+/* ==================== OUTPUT VIEW (shared shell) ==================== */
+.view-output {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  padding: 32px 28px 80px;
+}
+@media (max-width: 880px) {
+  .view-output { grid-template-columns: 1fr; gap: 0; padding-top: 20px; }
+  .output-sidebar { position: static !important; margin-bottom: 20px; }
+}
+.output-sidebar {
+  position: sticky;
+  top: 76px;
+  align-self: start;
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 12px;
+  box-shadow: var(--sh-card);
+}
+.output-sidebar h4 {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--hs-text-mute);
+  text-transform: uppercase;
+  margin: 6px 12px 8px;
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  color: var(--hs-text);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.sidebar-item .ico { width: 14px; height: 14px; color: var(--hs-text-mute); }
+.sidebar-item:hover { background: var(--hs-line-faint); }
+.sidebar-item.active {
+  background: var(--hs-orange-soft);
+  color: var(--hs-orange-deep);
+  font-weight: 500;
+}
+.sidebar-item.active .ico { color: var(--hs-orange-deep); }
+
+.crm-stamp {
+  margin: 14px 12px 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hs-line-soft);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--hs-text-mute);
+  line-height: 1.5;
+}
+.crm-stamp strong { color: var(--hs-navy); font-weight: 600; }
+
+.output-main {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-card);
+  overflow: hidden;
+}
+
+/* ==================== DECK OUTPUT (HubSpot-branded) ==================== */
+.deck-section { padding: 40px 48px; border-bottom: 1px solid var(--hs-line-soft); }
+.deck-section:last-child { border-bottom: 0; }
+@media (max-width: 720px) { .deck-section { padding: 28px 24px; } }
+
+.deck-section.deck-hero { padding-top: 56px; padding-bottom: 48px; }
+.deck-hero .stamp {
+  display: inline-block;
+  background: var(--hs-orange);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  margin-bottom: 18px;
+}
+.deck-hero h1 {
+  font-family: var(--sans);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 600;
+  color: var(--hs-navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 14px;
+  max-width: 24ch;
+}
+.deck-hero h1 .for {
+  display: block;
+  font-size: 0.5em;
+  color: var(--hs-text-mute);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-bottom: 10px;
+}
+.deck-hero .lede {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--hs-text-2);
+  max-width: 56ch;
+  margin: 0 0 28px;
+}
+.deck-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hs-line-soft);
+}
+.deck-meta .cell h4 {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--hs-text-mute);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.deck-meta .cell p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--hs-navy);
+  white-space: pre-line;
+  line-height: 1.45;
+}
+
+.deck-section h2 {
+  font-family: var(--sans);
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 600;
+  color: var(--hs-navy);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 12px 0 10px;
+}
+.deck-section .section-eyebrow {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hs-orange-deep);
+}
+.deck-section .section-intro {
+  font-size: 15px;
+  color: var(--hs-text-2);
+  max-width: 60ch;
+  margin: 0 0 22px;
+}
+
+.letter-body {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--hs-text);
+  max-width: 60ch;
+}
+.letter-body p { margin: 0 0 1.1em; }
+.letter-body p:last-child { margin-bottom: 0; }
+.rep-signature {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hs-line-soft);
+  font-size: 13px;
+  color: var(--hs-orange-deep);
+  font-style: italic;
+  max-width: 60ch;
+}
+
+.gaps-callout {
+  margin: 22px 0 0;
+  padding: 18px 22px;
+  background: var(--hs-warn-bg);
+  border-left: 3px solid var(--hs-warn);
+  border-radius: var(--r-sm);
+  max-width: 720px;
+}
+.gaps-callout h4 {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--hs-warn);
+  text-transform: uppercase;
+}
+.gaps-list { margin: 0; padding: 0; list-style: none; font-size: 14px; color: var(--hs-text); }
+.gaps-list li {
+  padding: 8px 0 8px 22px;
+  position: relative;
+  border-bottom: 1px dashed rgba(247, 167, 0, 0.3);
+}
+.gaps-list li:last-child { border-bottom: 0; }
+.gaps-list li::before {
+  content: "?";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--hs-warn);
+  font-weight: 700;
+  font-size: 14px;
+}
+.gap-action {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--hs-text-mute);
+  letter-spacing: 0.02em;
+  margin-top: 3px;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
+}
+@media (max-width: 720px) { .pain-grid { grid-template-columns: 1fr; } }
+.pain-card {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 22px;
+}
+.pain-card .src {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--hs-orange-deep);
+  margin-bottom: 10px;
+}
+.pain-card h3 {
+  font-family: var(--sans);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+.pain-card p {
+  font-size: 13.5px;
+  color: var(--hs-text-2);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.play {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hs-line-soft);
+  align-items: start;
+}
+.play:last-child { border-bottom: 0; }
+.play:first-child { padding-top: 0; }
+.play .ix {
+  font-family: var(--mono);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--hs-orange);
+  font-weight: 700;
+}
+.play .tag {
+  display: inline-block;
+  background: var(--hs-orange-soft);
+  color: var(--hs-orange-deep);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  margin-bottom: 10px;
+}
+.play h3 {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.play p {
+  font-size: 14px;
+  color: var(--hs-text-2);
+  margin: 0 0 12px;
+  line-height: 1.55;
+}
+.play .features { display: flex; flex-wrap: wrap; gap: 6px; }
+.play .feat {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--hs-line-faint);
+  color: var(--hs-text);
+  padding: 4px 9px;
+  border-radius: var(--r-xs);
+  border: 1px solid var(--hs-line-soft);
+}
+@media (max-width: 600px) { .play { grid-template-columns: 1fr; gap: 8px; } }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+.person {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+}
+.person h4 {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.person .role {
+  font-size: 12px;
+  color: var(--hs-text-mute);
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+.person .role em {
+  display: block;
+  font-style: italic;
+  color: var(--hs-text-faint);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.person .ben {
+  font-size: 13px;
+  color: var(--hs-text);
+  line-height: 1.55;
+}
+.person .ben strong {
+  color: var(--hs-orange-deep);
+  font-weight: 600;
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.invest-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.invest-table th, .invest-table td {
+  text-align: left;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hs-line-soft);
+  font-size: 14px;
+}
+.invest-table th {
+  font-weight: 500;
+  color: var(--hs-text-mute);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.invest-table td .item-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--hs-text-mute);
+  display: block;
+  margin-top: 3px;
+}
+.invest-table td.amt {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--hs-navy);
+  white-space: nowrap;
+}
+.invest-table tr.total td {
+  padding: 18px 0 4px;
+  font-weight: 700;
+  font-size: 15.5px;
+  color: var(--hs-navy);
+  border-bottom: 0;
+}
+.invest-table tr.total td.amt {
+  font-family: var(--sans);
+  font-size: 24px;
+  color: var(--hs-orange-deep);
+  font-weight: 600;
+}
+.offer-rationale {
+  margin-top: 18px;
+  padding: 18px 22px;
+  background: var(--hs-bg);
+  border-left: 3px solid var(--hs-orange);
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  color: var(--hs-text);
+  line-height: 1.6;
+}
+.offer-rationale p { margin: 0 0 0.9em; }
+.offer-rationale p:last-child { margin-bottom: 0; }
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 760px) { .timeline { grid-template-columns: 1fr; } }
+.step {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 22px;
+}
+.step .when {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hs-orange-deep);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.step h3 {
+  font-family: var(--sans);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 12px;
+}
+.step ul { margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--hs-text); }
+.step li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.step li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  color: var(--hs-orange);
+  font-family: var(--mono);
+}
+
+.close-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  background: var(--hs-navy);
+  color: #fff;
+  border-radius: var(--r-md);
+  padding: 24px 28px;
+  margin-top: 22px;
+}
+.close-card .sig-name { font-family: var(--sans); font-size: 17px; font-weight: 600; margin: 0; }
+.close-card .sig-role { font-size: 12.5px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+.close-card a.cta {
+  background: var(--hs-orange);
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: var(--r-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s;
+}
+.close-card a.cta:hover { background: var(--hs-orange-deep); }
+@media (max-width: 600px) { .close-card { grid-template-columns: 1fr; } }
+
+/* ==================== RECAP OUTPUT ==================== */
+.recap-pane { padding: 36px 44px; }
+@media (max-width: 720px) { .recap-pane { padding: 24px 22px; } }
+.recap-head {
+  border-bottom: 1px solid var(--hs-line-soft);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.recap-head .voice-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--hs-orange-soft);
+  color: var(--hs-orange-deep);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  margin-bottom: 12px;
+}
+.recap-head h2 {
+  font-family: var(--sans);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 6px;
+  letter-spacing: -0.015em;
+}
+.recap-head .meta {
+  font-size: 13px;
+  color: var(--hs-text-mute);
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.recap-meta-row {
+  background: var(--hs-bg);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: var(--hs-text);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+}
+.recap-meta-row dt { color: var(--hs-text-mute); font-weight: 500; }
+.recap-meta-row dd { margin: 0; }
+.recap-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--hs-text);
+  max-width: 64ch;
+}
+.recap-body p { margin: 0 0 1.15em; }
+.recap-body p:last-child { margin-bottom: 0; }
+.recap-signoff {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hs-line-soft);
+  font-size: 14.5px;
+  color: var(--hs-text);
+}
+.recap-bullets {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--hs-text);
+}
+.recap-bullets li { margin-bottom: 6px; }
+
+/* ==================== BRIEFING OUTPUT (the intelligence kernel surface) ==================== */
+.brief-pane { padding: 32px 40px; }
+@media (max-width: 720px) { .brief-pane { padding: 22px 22px; } }
+.brief-health {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 22px 26px;
+  border-radius: var(--r-md);
+  margin-bottom: 28px;
+  background: var(--hs-bg);
+  border-left: 4px solid var(--hs-text-mute);
+}
+.brief-health.green { background: var(--hs-success-bg); border-left-color: var(--hs-success); }
+.brief-health.yellow { background: var(--hs-warn-bg); border-left-color: var(--hs-warn); }
+.brief-health.red { background: #fef2f2; border-left-color: var(--hs-error); }
+.brief-health .signal {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--hs-text-mute);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.brief-health.green .signal { background: var(--hs-success); }
+.brief-health.yellow .signal { background: var(--hs-warn); }
+.brief-health.red .signal { background: var(--hs-error); }
+.brief-health h2 {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+.brief-health p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--hs-text);
+  line-height: 1.5;
+}
+.brief-changed {
+  font-size: 12px;
+  color: var(--hs-text-mute);
+  margin-top: 8px;
+  font-family: var(--mono);
+}
+
+.brief-block { margin-bottom: 32px; }
+.brief-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.brief-block-head h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brief-block-head h3::before {
+  content: "";
+  width: 4px;
+  height: 16px;
+  background: var(--hs-orange);
+  border-radius: var(--r-xs);
+}
+.brief-block-head .src {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--hs-text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.top-moves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.top-move {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-left: 3px solid var(--hs-orange);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.top-move .rank {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: var(--hs-orange);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 50%;
+}
+.top-move .move-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  line-height: 1.4;
+}
+.top-move .why {
+  font-size: 12px;
+  color: var(--hs-text-mute);
+  line-height: 1.45;
+}
+.top-move .src-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--hs-orange-deep);
+  background: var(--hs-orange-soft);
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.similar-deals {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.sim-deal {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+}
+.sim-deal .outcome {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  margin-bottom: 6px;
+}
+.sim-deal .outcome.won { background: var(--hs-success-bg); color: var(--hs-success); }
+.sim-deal .outcome.lost { background: #fef2f2; color: var(--hs-error); }
+.sim-deal h5 {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 4px;
+}
+.sim-deal .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--hs-text-mute);
+  margin-bottom: 8px;
+}
+.sim-deal .insight {
+  font-size: 12.5px;
+  color: var(--hs-text);
+  line-height: 1.5;
+}
+
+.plays-watch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px) { .plays-watch { grid-template-columns: 1fr; } }
+.plays-col h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.plays-col.wins h4 { color: var(--hs-success); }
+.plays-col.losses h4 { color: var(--hs-error); }
+.plays-col ul { margin: 0; padding: 0; list-style: none; }
+.plays-col li {
+  padding: 8px 14px;
+  margin-bottom: 6px;
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  color: var(--hs-text);
+  line-height: 1.5;
+}
+.plays-col.wins li { border-left: 3px solid var(--hs-success); }
+.plays-col.losses li { border-left: 3px solid var(--hs-error); }
+.plays-col .evidence {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--hs-text-mute);
+  margin-top: 3px;
+}
+
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.industry-stat {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+}
+.industry-stat .label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hs-text-mute);
+  margin-bottom: 4px;
+}
+.industry-stat .value {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--hs-navy);
+}
+.industry-positions {
+  font-size: 13px;
+  color: var(--hs-text);
+  line-height: 1.55;
+  padding: 12px 16px;
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+}
+.industry-positions strong { color: var(--hs-navy); }
+.industry-comps {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--hs-text-mute);
+  margin-top: 8px;
+}
+
+.playbook-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px) { .playbook-compare { grid-template-columns: 1fr; } }
+.pb-col {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+}
+.pb-col h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hs-text-mute);
+  margin: 0 0 10px;
+}
+.pb-col ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--hs-text); line-height: 1.55; }
+.pb-col.expected ul li { color: var(--hs-success); }
+.pb-col.gaps ul li { color: var(--hs-error); }
+.playbook-critical {
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: var(--hs-navy);
+  color: #fff;
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.playbook-critical .label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--hs-orange);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.behavioral {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+@media (max-width: 720px) { .behavioral { grid-template-columns: 1fr; } }
+.behavioral-fit {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--hs-text);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.coaching-ask {
+  background: var(--hs-orange-soft);
+  border: 1px solid var(--hs-orange-light);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  align-items: center;
+}
+.coaching-ask .avatar {
+  width: 56px;
+  height: 56px;
+  background: var(--hs-orange);
+  color: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 700;
+}
+.coaching-ask h4 {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 4px;
+}
+.coaching-ask .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--hs-text-mute);
+  margin-bottom: 8px;
+}
+.coaching-ask .ask {
+  font-size: 13.5px;
+  color: var(--hs-text);
+  line-height: 1.55;
+}
+.coaching-ask .ask strong { color: var(--hs-orange-deep); }
+
+/* ==================== COACHING OUTPUT ==================== */
+.coach-pane { padding: 32px 40px; }
+@media (max-width: 720px) { .coach-pane { padding: 22px 22px; } }
+.coach-head {
+  border-bottom: 1px solid var(--hs-line-soft);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.coach-head h2 {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 6px;
+  letter-spacing: -0.015em;
+}
+.coach-head p {
+  font-size: 13.5px;
+  color: var(--hs-text-mute);
+  margin: 0;
+}
+.proves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 8px 0 28px;
+}
+.proves-card {
+  background: var(--hs-warn-bg);
+  border: 1px solid rgba(247,167,0,0.25);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+}
+.proves-card .type {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hs-warn);
+  margin-bottom: 8px;
+}
+.proves-card h4 {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+.proves-card p {
+  font-size: 12.5px;
+  color: var(--hs-text);
+  margin: 0;
+  line-height: 1.5;
+}
+.coach-block { margin-bottom: 28px; }
+.coach-block h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.coach-block h3::before {
+  content: "";
+  width: 4px;
+  height: 16px;
+  background: var(--hs-orange);
+  border-radius: var(--r-xs);
+}
+.coach-questions, .coach-watch {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.coach-questions li, .coach-watch li {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--hs-text);
+  line-height: 1.5;
+}
+.coach-questions li {
+  border-left: 3px solid var(--hs-orange);
+}
+.coach-watch li {
+  border-left: 3px solid var(--hs-error);
+}
+.coach-questions li::before {
+  content: "Q: ";
+  color: var(--hs-orange-deep);
+  font-weight: 700;
+}
+.coach-context {
+  display: block;
+  font-size: 11.5px;
+  color: var(--hs-text-mute);
+  margin-top: 4px;
+  font-family: var(--mono);
+}
+
+/* ==================== STRATEGIC OUTPUT ==================== */
+.strat-pane { padding: 32px 40px; }
+@media (max-width: 720px) { .strat-pane { padding: 22px 22px; } }
+.strat-head {
+  border-bottom: 1px solid var(--hs-line-soft);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.strat-head h2 {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 6px;
+}
+.strat-head p {
+  font-size: 13.5px;
+  color: var(--hs-text-mute);
+  margin: 0;
+}
+.strat-block { margin-bottom: 28px; }
+.strat-block h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.strat-block h3 .count {
+  background: var(--hs-line-faint);
+  color: var(--hs-text-mute);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+}
+.strat-list { margin: 0; padding: 0; list-style: none; }
+.strat-list li {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--hs-text);
+  line-height: 1.55;
+}
+.strat-list .label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hs-orange-deep);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.strat-list .why {
+  display: block;
+  font-size: 12.5px;
+  color: var(--hs-text-mute);
+  margin-top: 6px;
+}
+
+/* ==================== FORECASTING OUTPUT ==================== */
+.fc-pane { padding: 32px 40px; }
+@media (max-width: 720px) { .fc-pane { padding: 22px 22px; } }
+.fc-head {
+  border-bottom: 1px solid var(--hs-line-soft);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.fc-head h2 {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 6px;
+}
+.fc-head p {
+  font-size: 13.5px;
+  color: var(--hs-text-mute);
+  margin: 0;
+}
+.fc-confidence {
+  background: var(--hs-bg);
+  border-radius: var(--r-md);
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+}
+@media (max-width: 600px) { .fc-confidence { grid-template-columns: 1fr; } }
+.fc-confidence .gauge {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--sans);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--hs-navy);
+  background: conic-gradient(var(--hs-orange) 0%, var(--hs-orange) var(--pct, 50%), var(--hs-line-soft) var(--pct, 50%), var(--hs-line-soft) 100%);
+  position: relative;
+}
+.fc-confidence .gauge::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background: var(--hs-bg);
+  border-radius: 50%;
+}
+.fc-confidence .gauge span { position: relative; z-index: 1; }
+.fc-confidence .gauge-info h3 {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 4px;
+}
+.fc-confidence .gauge-info p {
+  font-size: 13px;
+  color: var(--hs-text-2);
+  margin: 0;
+  line-height: 1.5;
+}
+.fc-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) { .fc-dates { grid-template-columns: 1fr; } }
+.fc-date-card {
+  background: var(--hs-card);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+}
+.fc-date-card .label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--hs-text-mute);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.fc-date-card .value {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin-bottom: 4px;
+}
+.fc-date-card .delta {
+  font-size: 11.5px;
+  color: var(--hs-text-2);
+  font-family: var(--mono);
+}
+.fc-block { margin-bottom: 26px; }
+.fc-block h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hs-navy);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fc-list { margin: 0; padding: 0; list-style: none; }
+.fc-list li {
+  background: var(--hs-bg);
+  border: 1px solid var(--hs-line-soft);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--hs-text);
+  line-height: 1.55;
+}
+.fc-list.blockers li { border-left: 3px solid var(--hs-error); }
+.fc-list.indicators li { border-left: 3px solid var(--hs-success); }
+
+/* ==================== ACTION BAR ==================== */
+.action-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--hs-navy);
+  color: #fff;
+  border-radius: 14px;
+  padding: 7px;
+  box-shadow: 0 12px 40px rgba(33,51,67,0.3), 0 4px 16px rgba(33,51,67,0.2);
+  display: flex;
+  gap: 4px;
+  z-index: 100;
+  animation: barIn 0.4s cubic-bezier(0.2,0.8,0.2,1);
+}
+@keyframes barIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.ab-btn {
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,0.85);
+  padding: 9px 14px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.12s;
+}
+.ab-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.ab-btn.primary { background: var(--hs-orange); color: #fff; }
+.ab-btn.primary:hover { background: var(--hs-orange-deep); }
+.ab-btn .ico { width: 14px; height: 14px; }
+.ab-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255,255,255,0.12);
+  margin: 4px 2px;
+}
+@media (max-width: 600px) { .ab-btn .label { display: none; } }
+
+/* ==================== TOASTS ==================== */
+.toast-area {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--hs-navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--r-md);
+  font-size: 12.5px;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(33,51,67,0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  animation: toastIn 0.25s cubic-bezier(0.2,0.8,0.2,1);
+  max-width: 360px;
+}
+.toast.error { background: var(--hs-error); }
+.toast.success { background: var(--hs-success); color: var(--hs-navy); }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.toast.dismiss { animation: toastOut 0.2s ease forwards; }
+@keyframes toastOut { to { opacity: 0; transform: translateX(20px); } }
+
+@media print {
+  .app-header, .action-bar, .toast-area, .output-sidebar { display: none !important; }
+  .view-output { grid-template-columns: 1fr !important; padding: 0 !important; max-width: none !important; }
+  .output-main { border: 0 !important; box-shadow: none !important; }
+  .deck-section, .recap-pane, .coach-pane, .strat-pane, .fc-pane { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="sprocket" viewBox="0 0 100 100"><g fill="#ff7a59"><line x1="50" y1="50" x2="50" y2="14" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><line x1="50" y1="50" x2="81" y2="32" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><line x1="50" y1="50" x2="81" y2="68" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><line x1="50" y1="50" x2="50" y2="86" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><line x1="50" y1="50" x2="19" y2="68" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><line x1="50" y1="50" x2="19" y2="32" stroke="#ff7a59" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="14" r="9"/><circle cx="81" cy="32" r="9"/><circle cx="81" cy="68" r="9"/><circle cx="50" cy="86" r="9"/><circle cx="19" cy="68" r="9"/><circle cx="19" cy="32" r="9"/><circle cx="50" cy="50" r="11" fill="#fff" stroke="#ff7a59" stroke-width="6"/></g></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+<symbol id="i-deck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M9 4v6"/></symbol>
+<symbol id="i-recap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+<symbol id="i-coach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+<symbol id="i-strategy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></symbol>
+<symbol id="i-forecast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-5"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+<symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+</svg>
+
+<header class="app-header">
+  <div class="brand" id="brand">
+    <svg class="sprocket" aria-hidden="true"><use href="#sprocket"/></svg>
+    <div class="brand-text">
+      <span class="brand-name">HubSpot</span>
+      <span class="brand-prod">Deal Builder <span class="pill">Beta</span></span>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="btn-back cls-h" id="header-back">
+      <svg class="ico" width="13" height="13"><use href="#i-back"/></svg>
+      <span>Start over</span>
+    </button>
+  </div>
+</header>
+
+<main class="view view-home" id="view-home">
+  <div class="home-head">
+    <span class="eyebrow">Welcome to Deal Builder</span>
+    <h1 class="home-h1">One Breeze paste.<br><span class="accent">Five views of your deal.</span></h1>
+    <p class="home-sub">Open the deal you're working on in HubSpot. Paste the prompt below into Breeze. Paste Breeze's response back here. Pick what you need — deck, recap, coaching, strategy, or forecast.</p>
+  </div>
+
+  <div class="steps-strip">
+    <div class="step-card">
+      <span class="num">01</span>
+      <h3>Open your deal</h3>
+      <p>Navigate to the deal you want to work on inside HubSpot.</p>
+    </div>
+    <div class="step-card">
+      <span class="num">02</span>
+      <h3>Run the prompt in Breeze</h3>
+      <p>Copy below, paste into Breeze. It identifies the deal from your session.</p>
+    </div>
+    <div class="step-card">
+      <span class="num">03</span>
+      <h3>Pick your output</h3>
+      <p>Paste Breeze's response, choose deck, recap, coaching, strategy, or forecast.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-label"><span class="badge active">1</span><span>The Breeze prompt</span></div>
+    <div class="prompt-block">
+      <div class="prompt-block-head">
+        <span class="label">Master prompt — covers all 5 outputs</span>
+        <div class="actions">
+          <button class="mini-btn" id="prompt-edit-btn"><svg class="ico"><use href="#i-edit"/></svg><span>Edit</span></button>
+          <button class="mini-btn primary" id="prompt-copy-btn"><svg class="ico"><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+      </div>
+      <div class="prompt-text" id="prompt-text"></div>
+    </div>
+    <div class="where-breeze">
+      <svg class="ico" width="14" height="14"><use href="#i-info"/></svg>
+      <div><strong>Where's Breeze?</strong> In HubSpot, click the <strong>sparkle icon</strong> top-right (or <kbd>⌘</kbd>+<kbd>K</kbd> in the Sales workspace and pick <em>Breeze</em>). Paste the prompt while you're viewing the deal — Breeze will use your session context. Wait for the response, then come back here.</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 28px;">
+    <div class="section-label"><span class="badge active" id="step2-badge">2</span><span>Breeze's response</span></div>
+    <textarea class="paste-area" id="paste-area" placeholder='Paste the whole response from Breeze here. It should be a single JSON object starting with { and ending with }.'></textarea>
+    <div class="paste-status" id="paste-status">Waiting for paste… <button id="btn-sample" style="margin-left:auto; background:transparent; border:0; color:var(--hs-orange-deep); font-size:12px; font-weight:500; cursor:pointer; padding:0; text-decoration:underline; font-family:inherit;">or try a sample to preview all five outputs →</button></div>
+  </div>
+
+  <div style="margin-top: 28px;">
+    <div class="section-label"><span class="badge" id="step3-badge">3</span><span>Pick an output</span></div>
+    <div class="outputs-grid">
+      <button class="output-tile" id="out-briefing" disabled data-out="briefing" style="border-color:var(--hs-orange); background:var(--hs-orange-soft);">
+        <div class="ico-wrap" style="background:#fff;"><svg width="18" height="18"><use href="#i-spark"/></svg></div>
+        <div class="title">Briefing</div>
+        <div class="desc">The intelligence kernel — pattern match, industry calibration, top 3 moves. Start here.</div>
+      </button>
+      <button class="output-tile" id="out-deck" disabled data-out="deck">
+        <div class="ico-wrap"><svg width="18" height="18"><use href="#i-deck"/></svg></div>
+        <div class="title">Create Deck</div>
+        <div class="desc">A polished, HubSpot-branded close deck for the customer.</div>
+      </button>
+      <button class="output-tile" id="out-recap" disabled data-out="recap">
+        <div class="ico-wrap"><svg width="18" height="18"><use href="#i-recap"/></svg></div>
+        <div class="title">Write a Recap</div>
+        <div class="desc">A summary in your voice, formatted to share internally or with the prospect.</div>
+      </button>
+      <button class="output-tile" id="out-coach" disabled data-out="coach">
+        <div class="ico-wrap"><svg width="18" height="18"><use href="#i-coach"/></svg></div>
+        <div class="title">Coaching</div>
+        <div class="desc">PROVES gaps, suggested questions, things to watch.</div>
+      </button>
+      <button class="output-tile" id="out-strategy" disabled data-out="strategy">
+        <div class="ico-wrap"><svg width="18" height="18"><use href="#i-strategy"/></svg></div>
+        <div class="title">Strategic Guidance</div>
+        <div class="desc">Dependencies, sponsors to recruit, escalation paths, multi-threading.</div>
+      </button>
+      <button class="output-tile" id="out-forecast" disabled data-out="forecast">
+        <div class="ico-wrap"><svg width="18" height="18"><use href="#i-forecast"/></svg></div>
+        <div class="title">Forecasting</div>
+        <div class="desc">Commit confidence, realistic close, top blockers, leading indicators.</div>
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- Shared output shell — renders one of five outputs depending on STATE.activeOutput -->
+<main class="view view-output cls-h" id="view-output">
+  <aside class="output-sidebar">
+    <h4>Outputs from this paste</h4>
+    <div class="sidebar-item" data-out="briefing"><svg class="ico"><use href="#i-spark"/></svg><span>Briefing</span></div>
+    <div class="sidebar-item" data-out="deck"><svg class="ico"><use href="#i-deck"/></svg><span>Deck</span></div>
+    <div class="sidebar-item" data-out="recap"><svg class="ico"><use href="#i-recap"/></svg><span>Recap</span></div>
+    <div class="sidebar-item" data-out="coach"><svg class="ico"><use href="#i-coach"/></svg><span>Coaching</span></div>
+    <div class="sidebar-item" data-out="strategy"><svg class="ico"><use href="#i-strategy"/></svg><span>Strategy</span></div>
+    <div class="sidebar-item" data-out="forecast"><svg class="ico"><use href="#i-forecast"/></svg><span>Forecast</span></div>
+    <div class="crm-stamp" id="crm-stamp"></div>
+  </aside>
+  <div class="output-main" id="output-main"></div>
+</main>
+
+<aside class="action-bar cls-h" id="action-bar">
+  <button class="ab-btn" id="ab-copy"><svg class="ico"><use href="#i-copy"/></svg><span class="label">Copy</span></button>
+  <button class="ab-btn" id="ab-print"><svg class="ico"><use href="#i-print"/></svg><span class="label">Print</span></button>
+  <div class="ab-divider"></div>
+  <button class="ab-btn primary" id="ab-new"><svg class="ico"><use href="#i-plus"/></svg><span class="label">New deal</span></button>
+</aside>
+
+<div class="toast-area" id="toasts"></div>
+
+<script>
+/* ==================== STATE ==================== */
+const STATE = {
+  view: 'home',           // home | output
+  payload: null,          // The full parsed JSON from Breeze
+  activeOutput: null,     // deck | recap | coach | strategy | forecast
+  prompt: '',
+};
+
+const STORAGE_KEY = 'dealbuilder:lastPaste:v1';
+
+/* ==================== HELPERS ==================== */
+function $(id) { return document.getElementById(id); }
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function safe(v, f) { return (v == null || v === '') ? f : v; }
+function fmtDate(iso) {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch (e) { return iso; }
+}
+function toast(msg, kind) {
+  kind = kind || '';
+  const icon = kind === 'error' ? 'i-alert' : 'i-check';
+  const t = document.createElement('div');
+  t.className = 'toast' + (kind ? ' ' + kind : '');
+  t.innerHTML = `<svg width="14" height="14"><use href="#${icon}"/></svg><span>${esc(msg)}</span>`;
+  $('toasts').appendChild(t);
+  setTimeout(() => { t.classList.add('dismiss'); setTimeout(() => t.remove(), 240); }, 2400);
+}
+
+/* ==================== VIEW MANAGER ==================== */
+function showView(name) {
+  STATE.view = name;
+  $('view-home').classList.toggle('cls-h', name !== 'home');
+  $('view-output').classList.toggle('cls-h', name !== 'output');
+  $('header-back').classList.toggle('cls-h', name === 'home');
+  $('action-bar').classList.toggle('cls-h', name !== 'output');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+/* ==================== JSON PARSING ==================== */
+function tryExtractJSON(text) {
+  if (!text) return null;
+  const cleaned = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+  const first = cleaned.indexOf('{');
+  const last = cleaned.lastIndexOf('}');
+  if (first === -1 || last === -1 || last <= first) return null;
+  const candidate = cleaned.slice(first, last + 1);
+  try { return JSON.parse(candidate); }
+  catch (e) {
+    try { return JSON.parse(candidate.replace(/,(\s*[}\]])/g, '$1')); }
+    catch (e2) { return null; }
+  }
+}
+
+/* ==================== PERSISTENCE ==================== */
+function saveToStorage(payload) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ payload, savedAt: new Date().toISOString() })); }
+  catch (e) {}
+}
+function loadFromStorage() {
+  try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; }
+  catch (e) { return null; }
+}
+
+/* ==================== MASTER BREEZE PROMPT ==================== */
+function buildMasterPrompt() {
+  const sixMonthsAgo = new Date(Date.now() - 1000*60*60*24*180).toISOString().slice(0,10);
+  const thirtyDaysAgo = new Date(Date.now() - 1000*60*60*24*30).toISOString().slice(0,10);
+  return `You are Breeze, embedded in HubSpot. The sales rep running this query is YOUR USER. Identify them from session context (get_user_details). Identify the deal they are currently viewing or recently working on. Then perform an exhaustive grounded research pass and return ONE JSON object that powers FIVE downstream outputs (deck, recap, coaching, strategy, forecast).
+
+You must use the user's actual HubSpot data. Do NOT invent. If a field cannot be grounded, return it as a gap.
+
+==================================================================
+PHASE 1 — IDENTIFY (use HubSpot session + tools)
+==================================================================
+- Use get_user_details to identify the rep (name, email, ownerId, primary team).
+- Identify the deal in focus. Default: the most recently modified open deal owned by the rep. If a deal name is mentioned in the user's recent prompts or session, prefer that one.
+
+==================================================================
+PHASE 2 — PULL EVERYTHING (CRM grounding)
+==================================================================
+
+A. DEAL RECORD
+  - search_crm_objects on deals. Pull all properties: dealname, amount, dealstage (label), pipeline, closedate, hubspot_owner_id, createdate, hs_lastmodifieddate, description, dealtype, hs_forecast_amount, hs_priority, and any custom deal properties present.
+  - Capture the deal ID. Use EXACT values — no rounding, no shifting.
+
+B. COMPANY RECORD
+  - search_crm_objects on companies associated with the deal. Pull: name, domain, website, industry, city, state, country, numberofemployees, lifecyclestage, description, type, annualrevenue. Use the real domain.
+
+C. ASSOCIATED CONTACTS
+  - search_crm_objects on contacts filtered by association to the deal AND to the company.
+  - Pull: firstname, lastname, email, phone, jobtitle, company, hs_buying_role, lifecyclestage.
+  - Capture employer entity from each contact's company field — it may differ from the deal company (e.g. a contact at "IcePlex" may have company="Palm Beach North Athletic Foundation" because PBNAF is the legal/operating entity).
+
+D. GUIDED SELLING & MEETING PREP NOTES (CRITICAL — treasure trove)
+  - search_crm_objects on notes associated with the deal AND the company, sorted by hs_createdate descending.
+  - Read every note body. Pay special attention to:
+    * "Meeting Prep Material" / "Guided Selling" notes — these contain PROVES gap analysis written by HubSpot's own AI. Extract every gap (Decision Criteria, Stakeholders, Timeline, Budget, Technical Fit, History) and every "Your Move" suggestion verbatim.
+    * Call summaries with extracted quotes from prospects
+    * Internal coaching notes from managers
+  - For each PROVES gap found, capture: gap type, what's unknown, suggested question, source note ID.
+
+E. RECENT REP EMAILS (for voice analysis)
+  - search_crm_objects on engagements/emails with hubspot_owner_id = the rep, since ${thirtyDaysAgo}. Sample 8-15 sent emails (prefer outbound to prospects).
+  - For each, read subject + body. Extract patterns:
+    * Tone (formal vs casual, technical vs business, warm vs direct)
+    * Opening style (greeting + first move)
+    * Closing/sign-off style
+    * Signature phrases or verbal tics the rep uses repeatedly
+    * Average paragraph length, use of dashes/parentheticals/em-dashes
+    * Whether they use first-name only, full salutation, no salutation
+  - Produce a one-paragraph "voice signature" the rest of the pipeline can mimic.
+
+F. REP HISTORY (last 6 months for momentum)
+  - search_crm_objects on deals owned by the rep where closedate > ${sixMonthsAgo}.
+  - Identify: top 3 HubSpot products/seats they've closed lately, average discovery-to-close velocity (in days), 1-2 objection patterns they've overcome, any comparable account they've recently won (industry/size match to current deal).
+
+G. RELATED DEAL HISTORY (this company)
+  - search_crm_objects on deals associated with the SAME company (not name-similar companies). Pull won/lost history with close reasons if surfaced in associated notes.
+
+H. ACTIVITY VELOCITY
+  - Count touchpoints in the last 30 days on this deal (calls, emails, meetings).
+  - Note the gap (days) since the last meaningful prospect interaction.
+  - Note any momentum signals: stage advancement, multi-thread expansion, new contact added.
+
+I. PATTERN MATCH — SIMILAR DEALS ACROSS THE REP'S TEAM
+  - Use get_user_details (TEAMS_AND_ROLES) to find the rep's team member owner IDs.
+  - search_crm_objects on deals owned by anyone on the team where hs_is_closed=true AND closedate within the last 365 days.
+  - Identify the 3-5 deals most similar to the current one. Similarity = same/adjacent industry + within ±50% of deal amount + similar stage progression + similar product mix.
+  - For each similar deal, note: outcome (won/lost), products sold, what's in the associated notes about why it won or lost, the rep who closed it.
+  - Extract patterns:
+    * Top 3 plays that show up in winners but not losers
+    * Top 2 loss patterns visible in the loser(s)
+    * The single highest-leverage move the current deal could borrow
+
+J. INDUSTRY INTEL — CALIBRATE TO THIS COMPANY'S SEGMENT
+  - Get the company's industry value from Phase 2.B.
+  - search_crm_objects on deals (any team, any rep) with companies in the same industry, closed last 12 months, sample up to 30.
+  - Compute: average deal size, average velocity (createdate to closedate in days), win rate (won / (won+lost)).
+  - Read win-deal notes to identify: top 3 winning positioning moves in this industry, recurring competitor mentions, common objections.
+
+K. PLAYBOOK DEVIATION READ
+  - From Phase 2.A, note the current dealstage and the days the deal has been in that stage.
+  - From Phase 1.I winners, identify what was TRUE about those deals at the same stage (decision-makers identified, pricing sent, technical fit confirmed, etc.).
+  - Compare current deal's state to that "winners at this stage" baseline. Identify specific deltas.
+
+L. REP BEHAVIORAL PATTERNS
+  - From Phase 1.F (rep's last 6 months) and Phase 1.I (similar team deals), look at the rep's wins and losses specifically.
+  - Identify 2-3 strengths (concrete things the rep does in wins) and 1-2 blindspots (concrete things missing from losses).
+  - Compare this current deal against those patterns. Where does it fit the win pattern? Where does it fit the loss pattern? Be specific.
+
+M. ORG WISDOM — WHO TO ASK
+  - From Phase 1.I winners, identify the AE who closed the deal most similar to this one in the last 90 days.
+  - Note their name, the deal they closed, what they sold, and what made it close.
+  - This is the person the current rep should ask for advice or shadow before next meeting.
+
+==================================================================
+PHASE 3 — NEVER-INVENT RULES
+==================================================================
+- If a field can't be grounded from CRM, return it in the "gaps" array, not in body content.
+- Don't pad the team with invented people. 3 real contacts beats 8 fabricated.
+- Don't guess emails. Use only what HubSpot has.
+- Don't invent close-loss reasons. Quote the source note.
+- If the rep is new with limited 6-month history, set voiceAnalysis and repSignature to minimal neutral text — proceed without inventing wins.
+
+==================================================================
+PHASE 4 — COMPOSE ALL FIVE OUTPUT PAYLOADS
+==================================================================
+
+Return ONLY this JSON, no preamble, no markdown fences:
+
+{
+  "crmGrounding": {
+    "dealId": "<deal record ID>",
+    "dealName": "<exact dealname>",
+    "dealStage": "<stage label, not stage ID>",
+    "closeDate": "YYYY-MM-DD",
+    "amount": "<raw amount, no formatting>",
+    "ownerName": "<rep name>",
+    "ownerEmail": "<rep email>"
+  },
+  "company": {
+    "name": "<exact company name>",
+    "tagline": "what they do — under 80 chars",
+    "industry": "<from HubSpot>",
+    "domain": "<real domain>",
+    "context": "parent co / brand / operating entity / recent news. Under 160 chars."
+  },
+  "contacts": [
+    {"name": "First Last", "role": "jobtitle", "employerEntity": "<from contact's company field>", "email": "<from CRM>", "phone": "<from CRM>"}
+  ],
+  "repProfile": {
+    "name": "<rep name>",
+    "email": "<rep email>",
+    "signature": "ONE concrete sentence: products championed last 6 months + style + recent comparable win. Under 200 chars.",
+    "voiceAnalysis": "ONE paragraph describing the rep's writing voice from Phase 2.E. Concrete: tone, signature phrases, sign-off pattern, paragraph length tendencies. Under 280 chars. This drives the recap."
+  },
+  "gaps": [
+    {"type": "stakeholder|decision_criteria|timeline|budget|technical|history", "what": "<quote from source note where possible>", "action": "specific next step under 80 chars", "source": "Guided Selling note ID or call date"}
+  ],
+  "relatedDeals": [
+    {"name": "<exact dealname>", "amount": "$X,XXX", "outcome": "Closed Won|Closed Lost|Open", "year": "YYYY", "reason": "<if surfaced in notes; omit otherwise>"}
+  ],
+
+  "intelligence": {
+    "similarDeals": [
+      {"name": "<exact dealname from team portfolio>", "outcome": "won|lost", "amount": "$X,XXX", "industry": "<from CRM>", "rep": "<name>", "closedDaysAgo": <integer>, "products": ["product 1", "product 2"], "keyInsight": "what this deal teaches about the current one — under 140 chars"}
+    ],
+    "winningPlays": [
+      {"play": "specific move pulled from winners (not generic). Under 100 chars.", "evidenceFrom": "<deal name where this was observed>"}
+    ],
+    "lossPatterns": [
+      {"pattern": "specific failure mode pulled from a loser. Under 100 chars.", "evidenceFrom": "<deal name>"}
+    ],
+    "industryIntel": {
+      "industry": "<from CRM>",
+      "sampleSize": <number of deals analyzed>,
+      "avgDealSize": "$X,XXX",
+      "avgVelocityDays": <integer>,
+      "winRate": "X%",
+      "recurringCompetitors": ["competitor 1", "competitor 2"],
+      "winningPositions": ["how HubSpot consistently wins in this industry — concrete, under 120 chars"]
+    },
+    "playbookDeviation": {
+      "currentStage": "<exact stage>",
+      "daysInStage": <integer>,
+      "expectedAtThisStage": ["what should be true by now based on winners — bullet 1", "bullet 2", "bullet 3"],
+      "gaps": ["specific gap vs. expected — bullet 1", "bullet 2"],
+      "criticalNextMove": "the one move that closes the biggest gap. Under 140 chars."
+    },
+    "behavioralPatterns": {
+      "strengths": ["what the rep consistently does in their wins — concrete, under 100 chars", "strength 2"],
+      "blindspots": ["what's been missing from losses — concrete, under 100 chars", "blindspot 2"],
+      "thisDealContext": "where this deal fits in the rep's pattern — under 160 chars"
+    },
+    "askForCoaching": {
+      "person": "<name of AE on the team who closed the most similar deal recently>",
+      "theirRecentWin": "<deal name>",
+      "closedDaysAgo": <integer>,
+      "whatToAsk": "specific question this rep should ask them. Under 120 chars."
+    }
+  },
+
+  "briefingContent": {
+    "headline": "ONE-sentence read of where this deal really is. Synthesizes the intelligence above into the single most important thing the rep needs to know.",
+    "healthSignal": "green|yellow|red",
+    "healthReasoning": "ONE sentence why — pulled from playbook deviation + velocity + behavioral fit",
+    "topThreeMoves": [
+      {"rank": 1, "move": "the single most leveraged next move — under 120 chars", "why": "under 100 chars", "fromIntelligence": "patternMatch|industry|playbook|behavioral|orgWisdom"}
+    ],
+    "whatChangedSinceLastTouch": "If notes show this is an updated read vs. previous activity, what's new. Otherwise: 'First read on this deal.' Under 140 chars."
+  },
+
+  "deckContent": {
+    "stamp": "ONE-LINE truthful badge, max 4 words. e.g. 'Pre-Open 6 Months', 'Existing Customer Expansion', '3rd Time Different Story'",
+    "history": "1-2 candid sentences for the side margin: prior touchpoints, lost deals, referral source. No sales-speak.",
+    "letter": "3 paragraphs as the rep writing to the primary stakeholder. Para 1: hard truth about current state with a SPECIFIC reference. Para 2: why the rep is the right partner — pull from repProfile.signature without bragging. Para 3: bridge to the 90-day plan. Sub-200 words. Separate paragraphs with double newlines.",
+    "headline": "5-9 words specific to THIS company",
+    "lede": "1-2 sentences below the headline naming what makes THIS company specific. Under 280 chars.",
+    "painSource": "Exact date + source. e.g. 'May 7, 2026 — 45-min call with Chuck Lawless' or 'Guided Selling prep note dated MM/DD'.",
+    "painPoints": [
+      {"title": "lossless quote or specific friction, <12 words", "detail": "1-2 sentences with specifics from notes/calls. Under 220 chars.", "source": "PAIN · CATEGORY"}
+    ],
+    "solutions": [
+      {"tag": "for [Specific Real Person + Role]", "headline": "what changes — 6-12 words", "explanation": "2-3 sentences. Real HubSpot capability + feature names. MUST link a pain to a rep-signature strength. Under 380 chars.", "features": ["feature 1", "feature 2", "feature 3"]}
+    ],
+    "team": [
+      {"name": "First Last (real, from contacts only)", "role": "jobtitle from CRM", "employerEntity": "<if different from main company>", "benefitTag": "1-3 words", "benefit": "1 sentence on HubSpot value for THEIR role. Under 200 chars."}
+    ],
+    "lineItems": [
+      {"item": "real HubSpot product/add-on", "note": "key spec under 60 chars", "amount": "$X,XXX or 'included'"}
+    ],
+    "totalLabel": "e.g. 'Year 1 contract value' or 'Monthly committed value'",
+    "totalAmount": "$X,XXX (matches deal.amount when reasonable)",
+    "offerRationale": "2 short paragraphs on why this configuration. In the rep's voice. Under 240 words.",
+    "ninetyDayPlan": [
+      {"phase": "Days 1-30 — Stand up", "title": "4-6 word title", "items": ["specific deliverable under 140 chars", "specific deliverable", "specific deliverable", "specific deliverable"]},
+      {"phase": "Days 31-60 — Prove", "title": "", "items": ["", "", "", ""]},
+      {"phase": "Days 61-90 — Earn it", "title": "", "items": ["", "", "", ""]}
+    ]
+  },
+
+  "recapContent": {
+    "kind": "internal|external",
+    "subject": "Email subject line. If internal: focused/operational. If external: warm/customer-facing.",
+    "salutation": "Hey {name}, or Team, or empty depending on tone",
+    "bodyParagraphs": ["Paragraph 1 written in the rep's voice from voiceAnalysis. Mirror their actual tone, length, signature phrases. 2-4 sentences each.", "Paragraph 2", "Paragraph 3"],
+    "bullets": ["3-5 short bullets summarizing what was decided / what's next / open items", "bullet 2", "bullet 3"],
+    "signoff": "How the rep typically signs off — pull from voiceAnalysis. e.g. 'Thanks,' or '— Chris' or '-RM'",
+    "voiceNote": "ONE sentence describing how this matches the rep's voice — for the rep to verify before sending."
+  },
+
+  "coachingContent": {
+    "headline": "ONE sentence assessment of where this deal really is",
+    "provesGaps": [
+      {"type": "Decision Criteria|Stakeholders|Timeline|Budget|Technical|History", "gap": "what's unknown, quoted from Guided Selling note where available", "why": "why this matters for closing"}
+    ],
+    "suggestedQuestions": [
+      {"question": "verbatim question to ask in next meeting", "context": "which gap this addresses + when to ask"}
+    ],
+    "risksToWatch": [
+      {"risk": "specific risk, not generic", "signal": "what to look for that would confirm it"}
+    ],
+    "nextBestActions": [
+      "specific action, under 100 chars, with a name attached if relevant",
+      "another action"
+    ]
+  },
+
+  "strategicContent": {
+    "headline": "ONE sentence strategic framing of the deal",
+    "dependencies": [
+      {"label": "what this deal depends on", "why": "why it matters", "owner": "who needs to drive it"}
+    ],
+    "multiThreadingOpportunities": [
+      {"label": "person/role to add", "why": "what they unlock", "owner": "who introduces them"}
+    ],
+    "internalSponsors": [
+      {"label": "internal HubSpot resource to recruit (SE, manager, exec)", "why": "what they unlock"}
+    ],
+    "competitiveRisks": [
+      {"label": "competitor or alternative", "why": "where they win, where we win"}
+    ],
+    "escalationPath": "ONE paragraph on when and how to escalate inside HubSpot if this slips."
+  },
+
+  "forecastContent": {
+    "commitConfidence": "low|medium|high",
+    "commitPercentage": <integer 0-100, calibrated to rep's actual close rate and observed momentum>,
+    "commitReasoning": "ONE paragraph why this confidence level — tie to concrete signals from CRM, not gut feel.",
+    "realisticCloseDate": "YYYY-MM-DD",
+    "crmCloseDate": "YYYY-MM-DD from deal record",
+    "closeDateDelta": "human-readable: 'on track', 'likely 2-3 weeks late', 'optimistic by a month'",
+    "velocityNote": "How this deal's velocity compares to the rep's average. e.g. 'tracking 18 days slower than your average for this stage'",
+    "topBlockers": [
+      {"label": "blocker, specific", "impact": "what stage/timeline gets hit"}
+    ],
+    "leadingIndicators": [
+      {"label": "positive signal observed", "why": "what it suggests"}
+    ],
+    "actionsToImproveCommit": [
+      "specific action under 100 chars"
+    ]
+  }
+}
+
+==================================================================
+FINAL DIRECTIVE — be a machine, not a chatbot
+==================================================================
+The first character of your response MUST be \`{\` and the last character MUST be \`}\`. Any other output breaks the receiving tool. No greeting, no preamble, no "Here is the JSON:", no closing remarks, no markdown fences, no commentary about what you found. Just the raw JSON object. If you cannot ground a field, output it in the "gaps" array — never invent and never apologize for the gap.`;
+}
+
+STATE.prompt = buildMasterPrompt();
+$('prompt-text').textContent = STATE.prompt;
+
+/* ==================== EVENT WIRING ==================== */
+$('brand').addEventListener('click', () => {
+  if (STATE.view === 'home') return;
+  if (!confirm('Leave this output?')) return;
+  showView('home');
+});
+$('header-back').addEventListener('click', () => {
+  if (!confirm('Leave this output?')) return;
+  showView('home');
+});
+
+$('prompt-copy-btn').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(STATE.prompt);
+    toast('Prompt copied — paste into Breeze', 'success');
+  } catch (e) {
+    const ta = document.createElement('textarea');
+    ta.value = STATE.prompt; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); toast('Prompt copied', 'success'); }
+    catch (er) { toast('Copy failed — select manually', 'error'); }
+    finally { ta.remove(); }
+  }
+});
+$('prompt-edit-btn').addEventListener('click', () => {
+  const el = $('prompt-text');
+  const editing = el.classList.toggle('editable');
+  el.contentEditable = editing ? 'true' : 'false';
+  $('prompt-edit-btn').innerHTML = editing
+    ? '<svg class="ico"><use href="#i-check"/></svg><span>Done</span>'
+    : '<svg class="ico"><use href="#i-edit"/></svg><span>Edit</span>';
+  if (editing) { el.focus(); toast('Edit then click Done', 'success'); }
+  else { STATE.prompt = el.innerText; toast('Prompt updated', 'success'); }
+});
+
+$('paste-area').addEventListener('input', (e) => {
+  const v = e.target.value.trim();
+  const st = $('paste-status');
+  if (!v) {
+    st.textContent = 'Waiting for paste…';
+    st.className = 'paste-status';
+    setOutputsEnabled(false);
+    return;
+  }
+  const parsed = tryExtractJSON(v);
+  if (parsed) {
+    STATE.payload = parsed;
+    const s = signalScore(parsed);
+    st.textContent = s.level === 'ok' ? `✓ Ready — ${s.summary}` : `⚠ JSON parsed but signal looks thin — ${s.reason}`;
+    st.className = 'paste-status ' + (s.level === 'ok' ? 'ok' : 'bad');
+    setOutputsEnabled(true);
+    $('step2-badge').classList.add('done');
+    $('step2-badge').classList.remove('active');
+    $('step3-badge').classList.add('active');
+    saveToStorage(parsed);
+  } else {
+    st.textContent = '⚠ No valid JSON detected. Paste the full Breeze response.';
+    st.className = 'paste-status bad';
+    setOutputsEnabled(false);
+  }
+});
+
+function setOutputsEnabled(on) {
+  ['out-briefing','out-deck','out-recap','out-coach','out-strategy','out-forecast'].forEach(id => {
+    $(id).disabled = !on;
+  });
+}
+
+function signalScore(d) {
+  const blob = JSON.stringify(d).toLowerCase();
+  const hsHits = (blob.match(/\b(hub|hubspot|breeze|marketing contacts|dedicated ip|smart crm|sales hub|service hub|content hub|data hub|workflow|sequence)\b/g) || []).length;
+  const hasGrounding = !!(d.crmGrounding && (d.crmGrounding.dealId || d.crmGrounding.dealName));
+  const hasContacts = Array.isArray(d.contacts) && d.contacts.length > 0;
+  const hasVoice = !!(d.repProfile && d.repProfile.voiceAnalysis && d.repProfile.voiceAnalysis.length > 40);
+  const hasGuidedSelling = Array.isArray(d.gaps) && d.gaps.length > 0;
+  const outputCount = ['deckContent','recapContent','coachingContent','strategicContent','forecastContent'].filter(k => d[k]).length;
+  const score = hsHits + (hasGrounding ? 4 : 0) + (hasContacts ? 2 : 0) + (hasVoice ? 3 : 0) + (hasGuidedSelling ? 2 : 0) + outputCount * 2;
+  if (score < 8) {
+    const missing = [];
+    if (!hasGrounding) missing.push('CRM grounding');
+    if (!hasVoice) missing.push('voice analysis');
+    if (outputCount < 3) missing.push(`${5 - outputCount} of 5 outputs`);
+    return { level: 'low', reason: 'missing ' + missing.join(', ') };
+  }
+  const bits = [];
+  if (hasGrounding) bits.push(`deal ${d.crmGrounding.dealId || '?'}`);
+  bits.push(`${outputCount}/5 outputs`);
+  if (hasContacts) bits.push(`${d.contacts.length} contacts`);
+  if (hasVoice) bits.push('voice ✓');
+  if (hasGuidedSelling) bits.push(`${d.gaps.length} gaps`);
+  return { level: 'ok', summary: bits.join(' · ') };
+}
+
+/* ==================== OUTPUT TILE / SIDEBAR CLICKS ==================== */
+document.querySelectorAll('.output-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    if (tile.disabled) return;
+    openOutput(tile.dataset.out);
+  });
+});
+document.querySelectorAll('.sidebar-item').forEach(item => {
+  item.addEventListener('click', () => openOutput(item.dataset.out));
+});
+
+function openOutput(kind) {
+  if (!STATE.payload) { toast('Paste Breeze\'s response first', 'error'); return; }
+  STATE.activeOutput = kind;
+  document.querySelectorAll('.sidebar-item').forEach(s => {
+    s.classList.toggle('active', s.dataset.out === kind);
+  });
+  renderActiveOutput();
+  renderCrmStamp();
+  showView('output');
+}
+
+function renderCrmStamp() {
+  const g = (STATE.payload && STATE.payload.crmGrounding) || {};
+  const stamp = $('crm-stamp');
+  if (!g.dealId && !g.dealName) { stamp.innerHTML = ''; return; }
+  const parts = [];
+  if (g.dealName) parts.push(`<strong>${esc(g.dealName)}</strong>`);
+  if (g.dealId) parts.push(`Deal ${esc(g.dealId)}`);
+  if (g.dealStage) parts.push(esc(g.dealStage));
+  if (g.closeDate) parts.push(`Close ${esc(g.closeDate)}`);
+  if (g.ownerName) parts.push(`Owner: ${esc(g.ownerName)}`);
+  stamp.innerHTML = 'Grounded in HubSpot<br>' + parts.join('<br>');
+}
+
+function renderActiveOutput() {
+  const k = STATE.activeOutput;
+  const main = $('output-main');
+  if (k === 'briefing') main.innerHTML = renderBriefingHtml(STATE.payload);
+  else if (k === 'deck') main.innerHTML = renderDeckHtml(STATE.payload);
+  else if (k === 'recap') main.innerHTML = renderRecapHtml(STATE.payload);
+  else if (k === 'coach') main.innerHTML = renderCoachHtml(STATE.payload);
+  else if (k === 'strategy') main.innerHTML = renderStrategyHtml(STATE.payload);
+  else if (k === 'forecast') main.innerHTML = renderForecastHtml(STATE.payload);
+}
+
+/* ==================== BRIEFING RENDERER (the kernel surface) ==================== */
+function renderBriefingHtml(d) {
+  const b = d.briefingContent || {};
+  const intel = d.intelligence || {};
+  const grounding = d.crmGrounding || {};
+  if (!b.headline && !intel.similarDeals) {
+    return `<div class="brief-pane"><h2 style="font-family:var(--sans); font-size:22px; color:var(--hs-navy); margin:0 0 8px;">No briefing generated</h2><p style="color:var(--hs-text-mute);">Breeze didn't include briefingContent or intelligence in this paste. The intelligence layer is the newest part of the prompt — Breeze may need to be asked again with full tool access.</p></div>`;
+  }
+  const health = (b.healthSignal || 'yellow').toLowerCase();
+  const healthLabels = { green: 'On Track', yellow: 'Watch', red: 'At Risk' };
+
+  let html = '<div class="brief-pane">';
+
+  // Health header
+  html += `<div class="brief-health ${esc(health)}"><div class="signal">${esc(healthLabels[health] || health)}</div>`;
+  html += `<div><h2>${esc(b.headline || 'No headline read.')}</h2>`;
+  if (b.healthReasoning) html += `<p>${esc(b.healthReasoning)}</p>`;
+  if (b.whatChangedSinceLastTouch) html += `<div class="brief-changed">${esc(b.whatChangedSinceLastTouch)}</div>`;
+  html += `</div></div>`;
+
+  // Top 3 moves
+  if (Array.isArray(b.topThreeMoves) && b.topThreeMoves.length > 0) {
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>Top moves, ranked</h3><span class="src">leveraged from intelligence below</span></div>`;
+    html += `<div class="top-moves">`;
+    b.topThreeMoves.forEach(m => {
+      html += `<div class="top-move">`;
+      html += `<div style="display:flex; gap:10px; align-items:center;"><span class="rank">${esc(m.rank || '')}</span>`;
+      if (m.fromIntelligence) html += `<span class="src-tag">${esc(m.fromIntelligence)}</span>`;
+      html += `</div>`;
+      html += `<div class="move-text">${esc(m.move || '')}</div>`;
+      if (m.why) html += `<div class="why">${esc(m.why)}</div>`;
+      html += `</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Similar deals
+  if (Array.isArray(intel.similarDeals) && intel.similarDeals.length > 0) {
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>Similar deals on your team</h3><span class="src">${intel.similarDeals.length} matched · last 12 months</span></div>`;
+    html += `<div class="similar-deals">`;
+    intel.similarDeals.forEach(sd => {
+      const oc = (sd.outcome || 'unknown').toLowerCase();
+      html += `<div class="sim-deal">`;
+      html += `<div class="outcome ${esc(oc)}">${esc(oc)}</div>`;
+      html += `<h5>${esc(sd.name || '')}</h5>`;
+      const metaBits = [];
+      if (sd.amount) metaBits.push(esc(sd.amount));
+      if (sd.rep) metaBits.push(esc(sd.rep));
+      if (sd.closedDaysAgo !== undefined && sd.closedDaysAgo !== null) metaBits.push(`${sd.closedDaysAgo}d ago`);
+      html += `<div class="meta">${metaBits.join(' · ')}</div>`;
+      if (sd.keyInsight) html += `<div class="insight">${esc(sd.keyInsight)}</div>`;
+      html += `</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Winning plays + loss patterns side-by-side
+  const wp = intel.winningPlays || [];
+  const lp = intel.lossPatterns || [];
+  if (wp.length > 0 || lp.length > 0) {
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>What separates winners from losers</h3></div>`;
+    html += `<div class="plays-watch">`;
+    if (wp.length > 0) {
+      html += `<div class="plays-col wins"><h4>Winning plays observed</h4><ul>`;
+      wp.forEach(p => {
+        html += `<li>${esc(p.play || '')}`;
+        if (p.evidenceFrom) html += `<span class="evidence">From: ${esc(p.evidenceFrom)}</span>`;
+        html += `</li>`;
+      });
+      html += `</ul></div>`;
+    }
+    if (lp.length > 0) {
+      html += `<div class="plays-col losses"><h4>Loss patterns to avoid</h4><ul>`;
+      lp.forEach(p => {
+        html += `<li>${esc(p.pattern || '')}`;
+        if (p.evidenceFrom) html += `<span class="evidence">From: ${esc(p.evidenceFrom)}</span>`;
+        html += `</li>`;
+      });
+      html += `</ul></div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  // Industry intel
+  const ii = intel.industryIntel || {};
+  if (ii.industry || ii.avgDealSize) {
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>Industry calibration</h3><span class="src">${esc(ii.industry || '')}${ii.sampleSize ? ' · n=' + esc(ii.sampleSize) : ''}</span></div>`;
+    html += `<div class="industry-grid">`;
+    if (ii.avgDealSize) html += `<div class="industry-stat"><div class="label">Avg deal</div><div class="value">${esc(ii.avgDealSize)}</div></div>`;
+    if (ii.avgVelocityDays !== undefined && ii.avgVelocityDays !== null) html += `<div class="industry-stat"><div class="label">Avg velocity</div><div class="value">${esc(ii.avgVelocityDays)}d</div></div>`;
+    if (ii.winRate) html += `<div class="industry-stat"><div class="label">Win rate</div><div class="value">${esc(ii.winRate)}</div></div>`;
+    html += `</div>`;
+    if (Array.isArray(ii.winningPositions) && ii.winningPositions.length > 0) {
+      html += `<div class="industry-positions"><strong>How HubSpot wins here:</strong><br>`;
+      html += ii.winningPositions.map(p => `&middot; ${esc(p)}`).join('<br>');
+      html += `</div>`;
+    }
+    if (Array.isArray(ii.recurringCompetitors) && ii.recurringCompetitors.length > 0) {
+      html += `<div class="industry-comps">Recurring competitors: ${ii.recurringCompetitors.map(c => esc(c)).join(', ')}</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Playbook deviation
+  const pb = intel.playbookDeviation || {};
+  if (pb.currentStage || pb.expectedAtThisStage) {
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>Playbook deviation</h3><span class="src">${esc(pb.currentStage || '')}${pb.daysInStage ? ' · ' + esc(pb.daysInStage) + 'd in stage' : ''}</span></div>`;
+    html += `<div class="playbook-compare">`;
+    if (Array.isArray(pb.expectedAtThisStage) && pb.expectedAtThisStage.length > 0) {
+      html += `<div class="pb-col expected"><h4>Winners at this stage</h4><ul>`;
+      pb.expectedAtThisStage.forEach(e => { html += `<li>${esc(e)}</li>`; });
+      html += `</ul></div>`;
+    }
+    if (Array.isArray(pb.gaps) && pb.gaps.length > 0) {
+      html += `<div class="pb-col gaps"><h4>This deal's gaps</h4><ul>`;
+      pb.gaps.forEach(g => { html += `<li>${esc(g)}</li>`; });
+      html += `</ul></div>`;
+    }
+    html += `</div>`;
+    if (pb.criticalNextMove) {
+      html += `<div class="playbook-critical"><div class="label">Single highest-leverage move</div>${esc(pb.criticalNextMove)}</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Behavioral patterns
+  const bp = intel.behavioralPatterns || {};
+  if (bp.strengths || bp.blindspots || bp.thisDealContext) {
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>Your behavioral patterns</h3><span class="src">${esc(grounding.ownerName || '')}</span></div>`;
+    html += `<div class="behavioral">`;
+    if (Array.isArray(bp.strengths) && bp.strengths.length > 0) {
+      html += `<div class="plays-col wins"><h4>Strengths in your wins</h4><ul>`;
+      bp.strengths.forEach(s => { html += `<li>${esc(s)}</li>`; });
+      html += `</ul></div>`;
+    }
+    if (Array.isArray(bp.blindspots) && bp.blindspots.length > 0) {
+      html += `<div class="plays-col losses"><h4>Blindspots from losses</h4><ul>`;
+      bp.blindspots.forEach(s => { html += `<li>${esc(s)}</li>`; });
+      html += `</ul></div>`;
+    }
+    html += `</div>`;
+    if (bp.thisDealContext) {
+      html += `<div class="behavioral-fit">${esc(bp.thisDealContext)}</div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Ask-for-coaching
+  const ac = intel.askForCoaching || {};
+  if (ac.person) {
+    const initials = ac.person.split(/\s+/).map(s => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+    html += `<div class="brief-block"><div class="brief-block-head"><h3>Who to ask for coaching</h3></div>`;
+    html += `<div class="coaching-ask"><div class="avatar">${esc(initials)}</div><div>`;
+    html += `<h4>${esc(ac.person)}</h4>`;
+    const acMeta = [];
+    if (ac.theirRecentWin) acMeta.push(`Closed: ${esc(ac.theirRecentWin)}`);
+    if (ac.closedDaysAgo !== undefined && ac.closedDaysAgo !== null) acMeta.push(`${ac.closedDaysAgo}d ago`);
+    if (acMeta.length > 0) html += `<div class="meta">${acMeta.join(' · ')}</div>`;
+    if (ac.whatToAsk) html += `<div class="ask"><strong>Ask:</strong> ${esc(ac.whatToAsk)}</div>`;
+    html += `</div></div></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+
+function renderDeckHtml(d) {
+  const c = d.deckContent || {};
+  const company = d.company || {};
+  const rep = d.repProfile || {};
+  const grounding = d.crmGrounding || {};
+  const contacts = d.contacts || [];
+  const gaps = d.gaps || [];
+  const team = c.team || [];
+  const pains = c.painPoints || [];
+  const solutions = c.solutions || [];
+  const plan = c.ninetyDayPlan || [];
+  const lineItems = c.lineItems || [];
+
+  // hide pricing entirely when not covered
+  const hasPricing = lineItems.length > 0 || (c.totalAmount && c.totalAmount !== '$' && c.totalAmount.length > 1);
+
+  let html = '';
+  html += `<section class="deck-section deck-hero">`;
+  if (c.stamp) html += `<span class="stamp">${esc(c.stamp)}</span>`;
+  html += `<h1>`;
+  if (company.name) html += `<span class="for">For ${esc(company.name)}</span>`;
+  html += `${esc(safe(c.headline, 'Built for the work you actually do.'))}</h1>`;
+  if (c.lede) html += `<p class="lede">${esc(c.lede)}</p>`;
+  html += `<div class="deck-meta">`;
+  if (company.name) html += `<div class="cell"><h4>Prepared for</h4><p>${esc(company.name)}</p></div>`;
+  if (rep.name) html += `<div class="cell"><h4>From</h4><p>${esc(rep.name)}${rep.email ? '\n' + esc(rep.email) : ''}</p></div>`;
+  if (grounding.closeDate) html += `<div class="cell"><h4>Decision date</h4><p>${esc(fmtDate(grounding.closeDate))}${grounding.dealStage ? '\n(' + esc(grounding.dealStage) + ')' : ''}</p></div>`;
+  html += `<div class="cell"><h4>Read time</h4><p>~5 minutes\n(or skip to the plan)</p></div>`;
+  html += `</div></section>`;
+
+  if (c.letter && c.letter.trim()) {
+    html += `<section class="deck-section">`;
+    html += `<span class="section-eyebrow">A note from ${esc(rep.name || 'your HubSpot AE')}</span>`;
+    html += `<h2>The candid version</h2>`;
+    if (c.history) html += `<p class="section-intro">${esc(c.history)}</p>`;
+    html += `<div class="letter-body">`;
+    c.letter.split(/\n\s*\n/).forEach(p => { html += `<p>${esc(p)}</p>`; });
+    html += `</div>`;
+    if (rep.signature) html += `<div class="rep-signature">— ${esc(rep.signature)}</div>`;
+    if (gaps.length > 0) {
+      html += `<div class="gaps-callout"><h4>Open questions before close</h4><ul class="gaps-list">`;
+      gaps.forEach(g => {
+        html += `<li>${esc(g.what || '')}${g.action ? `<span class="gap-action">→ ${esc(g.action)}</span>` : ''}</li>`;
+      });
+      html += `</ul></div>`;
+    }
+    html += `</section>`;
+  }
+
+  if (pains.length > 0) {
+    html += `<section class="deck-section">`;
+    html += `<span class="section-eyebrow">What we're hearing</span>`;
+    html += `<h2>Where the conversation is right now.</h2>`;
+    if (c.painSource) html += `<p class="section-intro">${esc(c.painSource)}</p>`;
+    html += `<div class="pain-grid">`;
+    pains.forEach(p => {
+      html += `<div class="pain-card">`;
+      html += `<div class="src">${esc(p.source || 'PAIN')}</div>`;
+      html += `<h3>${esc(p.title || '')}</h3>`;
+      html += `<p>${esc(p.detail || '')}</p>`;
+      html += `</div>`;
+    });
+    html += `</div></section>`;
+  }
+
+  if (solutions.length > 0) {
+    html += `<section class="deck-section">`;
+    html += `<span class="section-eyebrow">The answers</span>`;
+    html += `<h2>Mapped to specific levers in HubSpot.</h2>`;
+    html += `<p class="section-intro">Each move below links a pain you've named to a HubSpot capability we'd actually ship.</p>`;
+    solutions.forEach((s, i) => {
+      html += `<div class="play">`;
+      html += `<div class="ix">${String(i + 1).padStart(2, '0')}</div>`;
+      html += `<div>`;
+      if (s.tag) html += `<div class="tag">${esc(s.tag)}</div>`;
+      html += `<h3>${esc(s.headline || '')}</h3>`;
+      html += `<p>${esc(s.explanation || '')}</p>`;
+      if (Array.isArray(s.features) && s.features.length > 0) {
+        html += `<div class="features">`;
+        s.features.forEach(f => { html += `<span class="feat">${esc(f)}</span>`; });
+        html += `</div>`;
+      }
+      html += `</div></div>`;
+    });
+    html += `</section>`;
+  }
+
+  if (team.length > 0) {
+    html += `<section class="deck-section">`;
+    html += `<span class="section-eyebrow">Your team in HubSpot</span>`;
+    html += `<h2>${team.length} ${team.length === 1 ? 'name' : 'names'} from your account. What HubSpot does for each one.</h2>`;
+    html += `<p class="section-intro">Pulled from your contact records, not a generic ICP template.</p>`;
+    html += `<div class="team-grid">`;
+    team.forEach(t => {
+      const employer = t.employerEntity && t.employerEntity !== company.name ? `<em>${esc(t.employerEntity)}</em>` : '';
+      html += `<div class="person">`;
+      html += `<h4>${esc(t.name || '')}</h4>`;
+      html += `<div class="role">${esc(t.role || '')}${employer}</div>`;
+      html += `<div class="ben">`;
+      if (t.benefitTag) html += `<strong>${esc(t.benefitTag)}</strong>`;
+      html += esc(t.benefit || '');
+      html += `</div></div>`;
+    });
+    html += `</div></section>`;
+  }
+
+  // Pricing — ONLY renders if there's actual line item data
+  if (hasPricing) {
+    html += `<section class="deck-section">`;
+    html += `<span class="section-eyebrow">The line items</span>`;
+    html += `<h2>Annualized, transparent, no asterisks.</h2>`;
+    html += `<table class="invest-table"><thead><tr><th>Component</th><th style="text-align:right;">Amount</th></tr></thead><tbody>`;
+    lineItems.forEach(li => {
+      html += `<tr><td>${esc(li.item || '')}<span class="item-note">${esc(li.note || '')}</span></td><td class="amt">${esc(li.amount || '')}</td></tr>`;
+    });
+    if (c.totalAmount) {
+      html += `<tr class="total"><td>${esc(safe(c.totalLabel, 'Total'))}</td><td class="amt">${esc(c.totalAmount)}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+    if (c.offerRationale) {
+      html += `<div class="offer-rationale">`;
+      c.offerRationale.split(/\n\s*\n/).forEach(p => { html += `<p>${esc(p)}</p>`; });
+      html += `</div>`;
+    }
+    html += `</section>`;
+  }
+
+  if (plan.length > 0) {
+    html += `<section class="deck-section">`;
+    html += `<span class="section-eyebrow">If you say yes</span>`;
+    html += `<h2>A 90-day plan that earns the next decision.</h2>`;
+    html += `<div class="timeline">`;
+    plan.forEach(p => {
+      html += `<div class="step">`;
+      html += `<div class="when">${esc(p.phase || '')}</div>`;
+      if (p.title) html += `<h3>${esc(p.title)}</h3>`;
+      html += `<ul>`;
+      (p.items || []).forEach(it => { if (it && it.trim()) html += `<li>${esc(it)}</li>`; });
+      html += `</ul></div>`;
+    });
+    html += `</div>`;
+
+    // Close card
+    html += `<div class="close-card"><div><p class="sig-name">— ${esc(rep.name || 'Your HubSpot AE')}</p>`;
+    if (rep.email) html += `<div class="sig-role">HubSpot · ${esc(rep.email)}</div>`;
+    html += `</div>`;
+    if (rep.email) {
+      const subj = encodeURIComponent(`${company.name || 'Our'} — moving forward`);
+      html += `<a class="cta" href="mailto:${esc(rep.email)}?subject=${subj}"><span>Email ${esc(rep.name ? rep.name.split(' ')[0] : 'us')}</span><svg width="14" height="14"><use href="#i-arrow"/></svg></a>`;
+    }
+    html += `</div></section>`;
+  }
+
+  return html;
+}
+
+/* ==================== RECAP RENDERER ==================== */
+function renderRecapHtml(d) {
+  const r = d.recapContent || {};
+  const rep = d.repProfile || {};
+  const grounding = d.crmGrounding || {};
+  const company = d.company || {};
+  if (!r.subject && !r.bodyParagraphs) {
+    return `<div class="recap-pane"><h2 style="font-family:var(--sans); font-size:22px; color:var(--hs-navy); margin:0 0 8px;">No recap generated</h2><p style="color:var(--hs-text-mute);">Breeze didn't include a recapContent block in this paste. Re-run the prompt or check the response.</p></div>`;
+  }
+  let html = '<div class="recap-pane">';
+  html += '<div class="recap-head">';
+  html += `<div class="voice-tag"><svg width="11" height="11"><use href="#i-recap"/></svg>${esc(r.kind === 'external' ? 'External — customer voice' : 'Internal — team voice')}</div>`;
+  html += `<h2>${esc(r.subject || '(no subject)')}</h2>`;
+  const metaBits = [];
+  if (rep.name) metaBits.push(`From: ${esc(rep.name)}`);
+  if (company.name) metaBits.push(`Re: ${esc(company.name)}`);
+  if (grounding.dealName) metaBits.push(esc(grounding.dealName));
+  html += `<div class="meta">${metaBits.join(' &middot; ')}</div>`;
+  html += '</div>';
+
+  if (rep.voiceAnalysis) {
+    html += `<dl class="recap-meta-row"><dt>Voice match</dt><dd>${esc(rep.voiceAnalysis)}</dd>`;
+    if (r.voiceNote) html += `<dt>Note</dt><dd>${esc(r.voiceNote)}</dd>`;
+    html += '</dl>';
+  }
+
+  html += '<div class="recap-body">';
+  if (r.salutation) html += `<p><strong>${esc(r.salutation)}</strong></p>`;
+  (r.bodyParagraphs || []).forEach(p => { if (p && p.trim()) html += `<p>${esc(p)}</p>`; });
+  html += '</div>';
+
+  if (Array.isArray(r.bullets) && r.bullets.length > 0) {
+    html += '<ul class="recap-bullets" style="margin-top:18px;">';
+    r.bullets.forEach(b => { if (b && b.trim()) html += `<li>${esc(b)}</li>`; });
+    html += '</ul>';
+  }
+
+  if (r.signoff) {
+    html += `<div class="recap-signoff">${esc(r.signoff)}<br>${esc(rep.name || '')}</div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+/* ==================== COACHING RENDERER ==================== */
+function renderCoachHtml(d) {
+  const c = d.coachingContent || {};
+  if (!c.headline && !c.provesGaps && !c.suggestedQuestions) {
+    return `<div class="coach-pane"><h2 style="font-family:var(--sans); font-size:22px; color:var(--hs-navy); margin:0 0 8px;">No coaching generated</h2><p style="color:var(--hs-text-mute);">Breeze didn't include coachingContent. Re-run the prompt.</p></div>`;
+  }
+  let html = '<div class="coach-pane">';
+  html += '<div class="coach-head">';
+  html += '<h2>Coaching read</h2>';
+  if (c.headline) html += `<p>${esc(c.headline)}</p>`;
+  html += '</div>';
+
+  if (Array.isArray(c.provesGaps) && c.provesGaps.length > 0) {
+    html += '<div class="coach-block"><h3>PROVES gaps to close</h3>';
+    html += '<div class="proves-grid">';
+    c.provesGaps.forEach(g => {
+      html += '<div class="proves-card">';
+      html += `<div class="type">${esc(g.type || 'GAP')}</div>`;
+      html += `<h4>${esc(g.gap || '')}</h4>`;
+      if (g.why) html += `<p>${esc(g.why)}</p>`;
+      html += '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  if (Array.isArray(c.suggestedQuestions) && c.suggestedQuestions.length > 0) {
+    html += '<div class="coach-block"><h3>Questions to ask next</h3><ul class="coach-questions">';
+    c.suggestedQuestions.forEach(q => {
+      html += `<li>${esc(q.question || '')}`;
+      if (q.context) html += `<span class="coach-context">${esc(q.context)}</span>`;
+      html += '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  if (Array.isArray(c.risksToWatch) && c.risksToWatch.length > 0) {
+    html += '<div class="coach-block"><h3>Risks to watch</h3><ul class="coach-watch">';
+    c.risksToWatch.forEach(r => {
+      html += `<li><strong>${esc(r.risk || '')}</strong>`;
+      if (r.signal) html += `<span class="coach-context">Signal: ${esc(r.signal)}</span>`;
+      html += '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  if (Array.isArray(c.nextBestActions) && c.nextBestActions.length > 0) {
+    html += '<div class="coach-block"><h3>Next best actions</h3><ul class="coach-questions">';
+    c.nextBestActions.forEach(a => { html += `<li>${esc(a)}</li>`; });
+    html += '</ul></div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+/* ==================== STRATEGY RENDERER ==================== */
+function renderStrategyHtml(d) {
+  const s = d.strategicContent || {};
+  if (!s.headline && !s.dependencies && !s.multiThreadingOpportunities) {
+    return `<div class="strat-pane"><h2 style="font-family:var(--sans); font-size:22px; color:var(--hs-navy); margin:0 0 8px;">No strategic guidance generated</h2><p style="color:var(--hs-text-mute);">Breeze didn't include strategicContent. Re-run the prompt.</p></div>`;
+  }
+  let html = '<div class="strat-pane">';
+  html += '<div class="strat-head">';
+  html += '<h2>Strategic read</h2>';
+  if (s.headline) html += `<p>${esc(s.headline)}</p>`;
+  html += '</div>';
+
+  const sections = [
+    { key: 'dependencies', title: 'Dependencies' },
+    { key: 'multiThreadingOpportunities', title: 'Multi-threading opportunities' },
+    { key: 'internalSponsors', title: 'Internal sponsors to recruit' },
+    { key: 'competitiveRisks', title: 'Competitive risks' },
+  ];
+  sections.forEach(sec => {
+    const items = s[sec.key];
+    if (!Array.isArray(items) || items.length === 0) return;
+    html += `<div class="strat-block"><h3>${esc(sec.title)} <span class="count">${items.length}</span></h3>`;
+    html += '<ul class="strat-list">';
+    items.forEach(it => {
+      html += '<li>';
+      if (it.label) html += `<span class="label">${esc(it.label)}</span>`;
+      if (it.why) html += esc(it.why);
+      if (it.owner) html += `<span class="why">Owner: ${esc(it.owner)}</span>`;
+      html += '</li>';
+    });
+    html += '</ul></div>';
+  });
+
+  if (s.escalationPath) {
+    html += `<div class="strat-block"><h3>Escalation path</h3>`;
+    html += `<div style="background:var(--hs-bg); padding:18px 22px; border-radius:var(--r-sm); font-size:14px; line-height:1.65; color:var(--hs-text); border-left:3px solid var(--hs-navy);">${esc(s.escalationPath)}</div>`;
+    html += `</div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+/* ==================== FORECASTING RENDERER ==================== */
+function renderForecastHtml(d) {
+  const f = d.forecastContent || {};
+  if (!f.commitConfidence && !f.commitPercentage && !f.realisticCloseDate) {
+    return `<div class="fc-pane"><h2 style="font-family:var(--sans); font-size:22px; color:var(--hs-navy); margin:0 0 8px;">No forecast generated</h2><p style="color:var(--hs-text-mute);">Breeze didn't include forecastContent. Re-run the prompt.</p></div>`;
+  }
+  const pct = Math.max(0, Math.min(100, parseInt(f.commitPercentage, 10) || 0));
+  let html = '<div class="fc-pane">';
+  html += '<div class="fc-head"><h2>Forecast read</h2>';
+  if (f.commitReasoning) html += `<p>${esc(f.commitReasoning)}</p>`;
+  html += '</div>';
+
+  html += `<div class="fc-confidence"><div class="gauge" style="--pct: ${pct}%;"><span>${pct}%</span></div>`;
+  html += `<div class="gauge-info"><h3>${esc((f.commitConfidence || 'unknown').toUpperCase())} confidence</h3>`;
+  if (f.velocityNote) html += `<p>${esc(f.velocityNote)}</p>`;
+  html += '</div></div>';
+
+  if (f.realisticCloseDate || f.crmCloseDate) {
+    html += '<div class="fc-dates">';
+    if (f.crmCloseDate) {
+      html += `<div class="fc-date-card"><div class="label">CRM close date</div><div class="value">${esc(fmtDate(f.crmCloseDate))}</div></div>`;
+    }
+    if (f.realisticCloseDate) {
+      html += `<div class="fc-date-card"><div class="label">Realistic close</div><div class="value">${esc(fmtDate(f.realisticCloseDate))}</div>`;
+      if (f.closeDateDelta) html += `<div class="delta">${esc(f.closeDateDelta)}</div>`;
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  if (Array.isArray(f.topBlockers) && f.topBlockers.length > 0) {
+    html += '<div class="fc-block"><h3>Top blockers</h3><ul class="fc-list blockers">';
+    f.topBlockers.forEach(b => {
+      html += `<li><strong>${esc(b.label || '')}</strong>`;
+      if (b.impact) html += `<span class="coach-context" style="display:block;font-family:var(--mono);font-size:11.5px;color:var(--hs-text-mute);margin-top:4px;">Impact: ${esc(b.impact)}</span>`;
+      html += '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  if (Array.isArray(f.leadingIndicators) && f.leadingIndicators.length > 0) {
+    html += '<div class="fc-block"><h3>Leading indicators (positive)</h3><ul class="fc-list indicators">';
+    f.leadingIndicators.forEach(b => {
+      html += `<li><strong>${esc(b.label || '')}</strong>`;
+      if (b.why) html += `<span class="coach-context" style="display:block;font-family:var(--mono);font-size:11.5px;color:var(--hs-text-mute);margin-top:4px;">${esc(b.why)}</span>`;
+      html += '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  if (Array.isArray(f.actionsToImproveCommit) && f.actionsToImproveCommit.length > 0) {
+    html += '<div class="fc-block"><h3>Actions to lift commit</h3><ul class="fc-list">';
+    f.actionsToImproveCommit.forEach(a => { html += `<li>${esc(a)}</li>`; });
+    html += '</ul></div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+/* ==================== ACTION BAR ==================== */
+$('ab-copy').addEventListener('click', async () => {
+  const main = $('output-main');
+  const html = main ? main.innerHTML : '';
+  try {
+    await navigator.clipboard.writeText(html);
+    toast('Output HTML copied', 'success');
+  } catch (e) { toast('Copy failed', 'error'); }
+});
+$('ab-print').addEventListener('click', () => window.print());
+$('ab-new').addEventListener('click', () => {
+  if (!confirm('Start fresh? Your current paste stays saved for resume.')) return;
+  showView('home');
+  $('paste-area').focus();
+});
+
+/* ==================== RESUME FROM STORAGE (silent) ==================== */
+(function checkResume() {
+  const saved = loadFromStorage();
+  if (!saved || !saved.payload) return;
+  const pa = $('paste-area');
+  pa.value = JSON.stringify(saved.payload, null, 2);
+  pa.dispatchEvent(new Event('input', { bubbles: true }));
+  // No toast — silent. The paste area is just pre-populated.
+})();
+
+/* ==================== SAMPLE DATA (demo without Breeze) ==================== */
+const SAMPLE_PAYLOAD = {
+  crmGrounding: {
+    dealId: "59963616809", dealName: "IcePlex - New MHP Deal",
+    dealStage: "Solution Considerations", closeDate: "2026-08-28",
+    amount: "850", ownerName: "Cole Sanseverino", ownerEmail: "csanseverino@hubspot.com"
+  },
+  company: {
+    name: "IcePlex", tagline: "Two-brand ice rink — non-profit arena (PBG) + for-profit hockey (Longwood)",
+    industry: "Hospitality", domain: "pbgiceplex.org",
+    context: "Operated by Palm Beach North Athletic Foundation (501c3). New Palm Beach Gardens facility opens November 2026."
+  },
+  contacts: [
+    { name: "Chuck Lawless", role: "Operations / Facility Management", employerEntity: "Palm Beach North Athletic Foundation", email: "chuck@pbnaf.org", phone: "716-783-6635" }
+  ],
+  repProfile: {
+    name: "Cole Sanseverino", email: "csanseverino@hubspot.com",
+    signature: "10 years at HubSpot since the IPO — technologist-in-AE-skin with sports-arena Marketing Hub Pro deployments under his belt. Switzerland on integrations.",
+    voiceAnalysis: "Conversational, slightly self-deprecating, tech-fluent. Uses em-dashes liberally. Closes with first name only. Mixes business framing with humor. Long sentences with parentheticals. Frequently references having 'done this 100 times'."
+  },
+  gaps: [
+    { type: "stakeholder", what: "Rob mentioned as decision-maker but not in CRM yet — budget authority unclear across the two entities (PBNAF 501c3 vs. Longwood for-profit).", action: "Identify Rob and add as contact Monday", source: "Guided Selling note 109292958070" },
+    { type: "decision_criteria", what: "What specifically wins HubSpot vs. ConstantContact (Chuck's prior tool at his last facility)?", action: "Ask in Monday's demo: \"What would need to be true for HubSpot to be the right fit over ConstantContact?\"", source: "Guided Selling note 109292958070" },
+    { type: "timeline", what: "Facility opens November but no committed milestone for HubSpot go-live or contact migration.", action: "Work backward from August/September marketing push", source: "Guided Selling note 109292958070" }
+  ],
+  relatedDeals: [],
+  deckContent: {
+    stamp: "Seed Now · Grow at Open",
+    history: "Referred by Mark Roth's contact at Bond Sports. First-time HubSpot evaluation. Five years of paper waivers being hand-keyed by front desk. Finley masquerading as a CRM.",
+    letter: "Chuck, Amparo — you've got a paint-by-numbers marketing stack right now. Finley is your scheduler pretending to be a CRM. A shared Google Sheet collecting names line-by-line. Five years of paper waivers your front desk is hand-keying into Excel. You don't need another tool to add to the pile. You need a system of record before November.\n\nHere's why I'm the right partner for this one. I came in at HubSpot right after the IPO and I've spent a decade at the infrastructure layer — the part of marketing tech that moves data between systems. I've stood up Marketing Hub Pro at sports arenas, including the two-entity setup you'll need. I price early. I'm Switzerland on Finley vs. Bond Sports.\n\nWhat's below is a seed-and-grow plan calibrated to your November open. Demo Monday at noon.",
+    headline: "From paper waivers to your first 10,000 emails.",
+    lede: "A non-profit arena (IcePlex/PBG Ice Gardens) and a for-profit hockey program (Longwood) sharing one stack. Two CRMs, one bill, one source of truth — and an SMS layer that reminds adult-league players the night before their ice time.",
+    painSource: "May 7, 2026 — 45-minute Read.ai recording with Chuck Lawless and Amparo Reger.",
+    painPoints: [
+      { title: "Finley was sold as a CRM. It isn't.", detail: "\"I'm trying to use Finley's communication tools and information just isn't getting to our customers — email, text, or both.\" — Amparo", source: "PAIN · WRONG TOOL" },
+      { title: "Five years of paper waivers. Front desk is hand-keying them.", detail: "\"It's been a painful little process — but front desk is helping move it faster than I thought.\" — Amparo", source: "PAIN · NO SYSTEM OF RECORD" },
+      { title: "Day-before SMS reminders for ice time. We have nothing.", detail: "\"On the hockey side, mostly when they're registered to get their schedule, or as a reminder the day before.\" — Amparo", source: "PAIN · SMS" },
+      { title: "Lost adult-league and learn-to-skate players, can't see who's still active.", detail: "\"We have adult league we're trying to get back. So many learn-to-skate players have left.\" — Amparo", source: "PAIN · RE-ENGAGEMENT" }
+    ],
+    solutions: [
+      { tag: "for Amparo's list-building, today", headline: "Stop typing names into sheets. Start the list this week.", explanation: "$27/month Marketing Hub Starter ends the Google Sheets era today. Front desk fills one HubSpot form per attendee, routing directly into the CRM. When you decide between Finley and Bond Sports, I wire whichever wins as the upstream — names flow in, segmentation happens in HubSpot.", features: ["Marketing Hub Pro forms", "Open API integration", "Bond Sports / Finley pipe"] },
+      { tag: "for Chuck — IcePlex + Longwood", headline: "Two brands. One CRM. Separate lists, separate analytics.", explanation: "One Marketing Hub Pro account, two segmented contact lists, two sending domains, two brand asset libraries. IcePlex (501c3 via PBNAF) bills with the non-profit discount; Longwood Hockey bills commercially. The setup you ran on ConstantContact at your last facility — done right.", features: ["650 email channels / inbox", "100 domains / account", "Per-entity reporting + bill split"] },
+      { tag: "for adult league + youth hockey", headline: "Day-before SMS reminders. Same muscle memory as your emails.", explanation: "HubSpot's SMS engine uses the same workflow builder as your email automations. Build once — trigger on registration, fire 24 hours before scheduled ice time. No second tool, no second bill.", features: ["Native SMS workflow", "Trigger on registration", "Same UI as email automations"] },
+      { tag: "for Amparo's re-engagement push", headline: "Resurrect the adult league. One nurture campaign at a time.", explanation: "Once the 5 years of waivers are loaded into HubSpot, segment by \"last activity > 12 months.\" Send a 3-email re-engagement sequence with a free open-skate code. Only the ones who never respond go on the cold list.", features: ["Lifecycle segmentation", "Multi-step nurtures", "Bot-filtered open rates"] }
+    ],
+    team: [
+      { name: "Chuck Lawless", role: "Operations / Facility Management · IcePlex (PBG, 501c3)", employerEntity: "Palm Beach North Athletic Foundation", benefitTag: "Operations + visibility", benefit: "Two-brand operator dashboard. Same platform you wanted at the last facility, finally without the ConstantContact ceiling." },
+      { name: "Amparo Reger", role: "Marketing & Registrations · Longwood Hockey", employerEntity: "Longwood Hockey", benefitTag: "Marketing autonomy", benefit: "Schedule social, email, and SMS without an Adobe seat or four separate tools. Breeze generates landing pages and brand assets directly in-platform." },
+      { name: "Rob", role: "Decision-maker · referenced but not on the May 7 call", benefitTag: "Open question", benefit: "Per the call: \"this may be a discussion we have with Rob.\" Budget authority to be confirmed Monday — flagged in Cole's Guided Selling prep as an open PROVES gap." }
+    ],
+    lineItems: [
+      { item: "Marketing Hub Professional · monthly base", note: "$850/mo per current deal in HubSpot · 12-month commit · IcePlex + Longwood segmented in one instance", amount: "$10,200" },
+      { item: "Marketing Contacts — 7,000 tier", note: "Pre-committed; +5K tranches discounted as you grow", amount: "$1,800" },
+      { item: "Pro Onboarding", note: "90-day guided · list migration + first campaign", amount: "included" },
+      { item: "Breeze Credits — 3,000/mo", note: "Replaces Adobe for brand assets, copy, landing pages", amount: "included" },
+      { item: "Non-profit discount — IcePlex (PBNAF, 501c3)", note: "Applied to IcePlex portion only; Longwood bills standard", amount: "−$1,000" }
+    ],
+    totalLabel: "Year 1 · combined platform commitment",
+    totalAmount: "$11,000",
+    offerRationale: "This deal is calibrated to your November open. You're not buying email software — you're choosing the platform your team will run on for the next decade. Marketing Hub Pro at 7K contacts buys you the right starting line.\n\nThe non-profit discount applies to the IcePlex half. Annual upfront unlocks a discount vs. quarterly — but quarterly stays on the table if cash flow needs it before facility revenue starts.",
+    ninetyDayPlan: [
+      { phase: "Days 1-30 — Stand up", title: "Lists imported. Domains authenticated. Day one done.", items: ["Migrate 5 years of paper waivers into Marketing Hub Pro (~2,400 contacts)", "DKIM + DMARC on pbgiceplex.org and the Longwood Hockey domain", "Two CRM segments built: IcePlex (501c3) and Longwood (for-profit)", "First Breeze-generated brand asset pack — replaces Adobe seat"] },
+      { phase: "Days 31-60 — Prove", title: "First sends. First re-engagements. First reports.", items: ["Adult-league re-engagement campaign — 3 emails over 14 days, free open-skate offer", "Hockey program day-of-ice SMS reminders live (workflow-triggered, 24h before)", "First monthly analytics review with Amparo — open rate, unsubs, CTR", "Finley → HubSpot data pipe shipped (or Bond Sports, depending on which wins)"] },
+      { phase: "Days 61-90 — Earn it", title: "Open in November with momentum, not panic.", items: ["Pre-open landing pages live on both domains — co-branded for any boots-on-the-ground push", "Social media scheduled out 60 days for both entities, single content calendar", "Learn-to-skate fall registration campaign — multi-touch nurture into open-house RSVP", "Year-2 conversation, if Q3 metrics earn it"] }
+    ]
+  },
+  recapContent: {
+    kind: "internal",
+    subject: "IcePlex / Longwood — read after Monday's demo",
+    salutation: "Team,",
+    bodyParagraphs: [
+      "Quick read on where this one is. Had a 45-min discovery with Chuck and Amparo last Wednesday — two-entity setup (non-profit arena + for-profit hockey program), no email infrastructure today, Finley masquerading as a CRM. Demo Monday at noon. Deal in HubSpot at $850/mo, close 8/28.",
+      "Strongest signal: they've never had a real CRM, and they know it. Amparo is doing 5 years of paper waivers into Excel right now. The pain is concrete, not theoretical. They're also stuck choosing between Finley and Bond Sports for rink-scheduling and need to know we integrate with either.",
+      "Open questions before close: Rob (the actual decision-maker per Amparo) wasn't on the call and isn't in CRM yet. Budget authority across the two entities is unclear. No committed go-live milestone working backward from the November facility opening. Guided Selling note 109292958070 has the gap list."
+    ],
+    bullets: [
+      "Monday demo: lead with Finley + Bond Sports API findings; show contact import + re-engagement workflow live; demo Breeze logo gen (Amparo lit up on this in discovery)",
+      "Pricing email goes out before the demo — annual upfront vs. quarterly options, +5K tranches",
+      "Need Rob identified and looped in. Asking Chuck Monday."
+    ],
+    signoff: "— Cole",
+    voiceNote: "Matches Cole's voice: conversational, em-dash heavy, signs with first name. Length and tone calibrated to internal team-update — not a customer-facing email."
+  },
+  coachingContent: {
+    headline: "Strong signal on pain, weak signal on decision-making. The deal will live or die on whether you can get Rob in the room before the demo.",
+    provesGaps: [
+      { type: "Stakeholders", gap: "Rob is the decision-maker per Amparo but isn't on the call or in CRM. Budget authority across IcePlex (501c3) vs. Longwood (for-profit) is unclear.", why: "If Rob doesn't see the demo or the pricing, you're selling to influencers." },
+      { type: "Decision Criteria", gap: "Unclear what specifically wins HubSpot over the platform they used at the last facility (ConstantContact).", why: "Chuck has muscle memory on a competitor. Without explicit criteria, he'll default to what's familiar." },
+      { type: "Timeline", gap: "Facility opens November but no committed milestone for HubSpot go-live, contact migration, or pre-launch marketing kickoff.", why: "Without milestones working backward from August/September marketing push, urgency erodes." }
+    ],
+    suggestedQuestions: [
+      { question: "Walk me through how a decision like this gets made — who needs to sign off on the budget, and is that different between the arena (PBNAF) and Longwood?", context: "Closes the Stakeholders gap. Ask first thing in the demo before showing anything." },
+      { question: "As you're seeing this, what would need to be true for HubSpot to be the right fit over ConstantContact or anything else you've used?", context: "Closes the Decision Criteria gap. Best asked mid-demo, after Breeze logo gen lights up Amparo." },
+      { question: "You mentioned August/September for marketing push. If we're working backward from that, when would you need HubSpot fully set up and contacts imported?", context: "Closes the Timeline gap. Use to commit to a paper-trail go-live date." }
+    ],
+    risksToWatch: [
+      { risk: "Chuck reverts to ConstantContact muscle memory under price pressure", signal: "If pricing conversation goes sideways and he mentions \"we did this at my last place for X,\" you're losing on familiarity, not capability." },
+      { risk: "Rob never enters the conversation", signal: "If after the demo Chuck or Amparo say \"we'll discuss internally\" without a follow-up date with Rob included, deal stalls." }
+    ],
+    nextBestActions: [
+      "Send pricing breakdown email TO BOTH Chuck and Amparo before Monday's demo (avoid information asymmetry)",
+      "Open the demo with the stakeholder question — get Rob's role mapped before Breeze gen wow-factor",
+      "Commit to a written go-live milestone in the follow-up email"
+    ]
+  },
+  strategicContent: {
+    headline: "Two-entity buyer with a hard deadline (November open). Win it by anchoring HubSpot as the connective tissue, not as a product comparison vs. ConstantContact.",
+    dependencies: [
+      { label: "Finley vs. Bond Sports decision", why: "HubSpot needs to integrate with whichever wins. Without that resolved, contact sync is theoretical.", owner: "Chuck (operations) — push him to commit by end of next week" },
+      { label: "Rob's involvement", why: "He's the budget authority. Decisions without him in the room aren't decisions.", owner: "Chuck — explicitly request him on the next call" }
+    ],
+    multiThreadingOpportunities: [
+      { label: "Rob (last name TBD)", why: "Identified as decision-maker. Currently invisible. Bringing him in unlocks budget conversation.", owner: "Cole — request via Chuck Monday" },
+      { label: "Front desk lead", why: "They're doing the daily Excel-to-CRM work. Win them and you have an internal champion for the daily-use UX.", owner: "Cole — ask Chuck to introduce on next visit" }
+    ],
+    internalSponsors: [
+      { label: "Sports-vertical SE", why: "If HubSpot has an SE who's deployed at other rinks/sports facilities, get them on Monday's demo for the integration credibility." },
+      { label: "Cole's friend Kelsey in PBG", why: "Cole mentioned two HubSpot friends who recently did a build in Palm Beach Gardens. Local social proof — see if Kelsey can do an intro/reference." }
+    ],
+    competitiveRisks: [
+      { label: "ConstantContact (incumbent muscle memory)", why: "Chuck's prior facility used it. Familiarity beats novelty under pricing pressure. Counter with: feature parity + better integration story + non-profit pricing." },
+      { label: "Bond Sports' built-in comms", why: "If Bond Sports wins the scheduling decision AND their built-in email is good enough, our value drops. Anchor on cross-entity orchestration and SMS." }
+    ],
+    escalationPath: "If commit slips past September without a signed quote: escalate to your manager for an executive sponsor call with Rob and the PBNAF board. Pre-open status of the facility makes a Q4 close acceptable as long as marketing migration starts by August."
+  },
+  forecastContent: {
+    commitConfidence: "medium",
+    commitPercentage: 55,
+    commitReasoning: "Strong intent signals — discovery call ran 45 minutes, two stakeholders engaged, Breeze AI demo lit up Amparo. But three open PROVES gaps (Stakeholders, Decision Criteria, Timeline) and the absence of Rob (actual decision-maker) keep this medium until Monday's demo resolves at least one.",
+    realisticCloseDate: "2026-09-15",
+    crmCloseDate: "2026-08-28",
+    closeDateDelta: "Likely 2-3 weeks past CRM date. Cash-flow constraint (no facility revenue until November) suggests quarterly start vs. annual upfront.",
+    velocityNote: "Tracking close to your average for Solution Considerations stage (~28 days). November opening is a real deadline though — once you cross September 1, urgency favors closing.",
+    topBlockers: [
+      { label: "Rob not yet identified or engaged", impact: "Blocks Stakeholders close. Could stall deal in Pricing & Terms." },
+      { label: "Finley vs. Bond Sports decision pending", impact: "Integration credibility is conditional. If Bond Sports wins and pushes their comms tool, our value prop softens." }
+    ],
+    leadingIndicators: [
+      { label: "Two-entity buyer with concrete pain and a hard November deadline", why: "Buyers with deadlines close. Buyers exploring don't." },
+      { label: "Breeze AI demo got an explicit \"under one umbrella\" reaction from Amparo", why: "Direct quote: \"that would make it so much easier for us.\" That's purchase intent language." },
+      { label: "Inbound referral from Bond Sports", why: "Warm intro deals close 1.6x more than cold. Mark Roth's contact is a trust transfer." }
+    ],
+    actionsToImproveCommit: [
+      "Identify Rob and get him on a 15-min intro call before pricing finalizes",
+      "Commit to written go-live milestone in Monday's follow-up email",
+      "Send pricing breakdown to BOTH Chuck and Amparo Sunday — eliminate info asymmetry"
+    ]
+  },
+  intelligence: {
+    similarDeals: [
+      { name: "Skating Club of Boston — Marketing Hub Pro", outcome: "won", amount: "$14,400/yr", industry: "Hospitality/Recreation", rep: "Becca Rego", closedDaysAgo: 22, products: ["Marketing Hub Pro", "Marketing Contacts 10K"], keyInsight: "Two-entity rink (member + public skate). Won by demoing SMS workflow live in second call." },
+      { name: "Westborough Sports Center expansion", outcome: "won", amount: "$11,800/yr", industry: "Hospitality/Recreation", rep: "Conor Leighton", closedDaysAgo: 47, products: ["Marketing Hub Pro", "Pro Onboarding"], keyInsight: "Pre-open facility (similar Nov timing). Closed by anchoring on go-live milestone working backward from opening day." },
+      { name: "Coastal Hockey Foundation", outcome: "won", amount: "$9,600/yr", industry: "Non-profit/Sports", rep: "Chris Jourdain", closedDaysAgo: 68, products: ["Marketing Hub Pro", "Non-profit discount"], keyInsight: "501c3 + commercial entity split. Won by structuring quote with non-profit discount on the 501c3 portion only — exactly your setup." },
+      { name: "Apex Adventures — Activities Platform", outcome: "lost", amount: "$8,400/yr", industry: "Hospitality/Recreation", rep: "Cole Sanseverino", closedDaysAgo: 91, products: ["Marketing Hub Pro"], keyInsight: "Lost to Mailchimp on price after pricing was sent before decision criteria mapped. Same risk shape as IcePlex right now." }
+    ],
+    winningPlays: [
+      { play: "Live SMS workflow demo in the second call — not third", evidenceFrom: "Skating Club of Boston" },
+      { play: "Commit to a written go-live milestone working backward from a hard event date", evidenceFrom: "Westborough Sports Center expansion" },
+      { play: "Structure quote with non-profit discount only on the 501c3 line — keeps commercial side clean", evidenceFrom: "Coastal Hockey Foundation" }
+    ],
+    lossPatterns: [
+      { pattern: "Pricing sent before decision criteria and stakeholders are fully mapped — opens the door to apples-to-oranges price comparison", evidenceFrom: "Apex Adventures" }
+    ],
+    industryIntel: {
+      industry: "Hospitality / Sports & Recreation",
+      sampleSize: 23,
+      avgDealSize: "$10,800/yr",
+      avgVelocityDays: 42,
+      winRate: "61%",
+      recurringCompetitors: ["Mailchimp", "ConstantContact", "Bond Sports built-in comms"],
+      winningPositions: [
+        "Cross-entity orchestration (when there's a 501c3 + commercial split)",
+        "Native SMS in the same workflow builder as email — no second tool/bill",
+        "Pre-open list building during facility build-out phase"
+      ]
+    },
+    playbookDeviation: {
+      currentStage: "Solution Considerations",
+      daysInStage: 8,
+      expectedAtThisStage: [
+        "Decision-maker identified and engaged in at least one touchpoint",
+        "Decision criteria explicit (what wins HubSpot vs. alternatives)",
+        "Pricing range socialized (not full quote, but ballpark)",
+        "Internal champion identified inside buying org"
+      ],
+      gaps: [
+        "Rob (actual decision-maker per Amparo) not in CRM, not engaged",
+        "Decision criteria vs. ConstantContact never explicitly asked",
+        "Amparo is enthusiastic but champion status unclear — operations or marketing org?"
+      ],
+      criticalNextMove: "Get Rob on a 15-min intro before pricing finalizes. This single move closes 2 of the 3 gaps."
+    },
+    behavioralPatterns: {
+      strengths: [
+        "You consistently win on technical credibility — integration story lands when you demo it live",
+        "You close faster than team average when you commit to a written milestone in writing"
+      ],
+      blindspots: [
+        "Your Apex Adventures loss followed the same pattern: pricing landed before stakeholder map. Watch for this here.",
+        "You sometimes leave decision-criteria mapping to instinct — winners in your last 10 made it explicit in writing"
+      ],
+      thisDealContext: "This deal has both your strength signal (technical credibility lit up Amparo on Breeze AI) AND your blindspot signal (pricing coming up before Rob enters). Play to the strength, defuse the blindspot."
+    },
+    askForCoaching: {
+      person: "Chris Jourdain",
+      theirRecentWin: "Coastal Hockey Foundation",
+      closedDaysAgo: 68,
+      whatToAsk: "How did you structure the 501c3 + commercial quote split? Did you anchor the discount before or after the bundle?"
+    }
+  },
+  briefingContent: {
+    headline: "Strong intent and a hard November deadline, but you're at the exact pricing-before-stakeholders pattern that lost you Apex Adventures 91 days ago.",
+    healthSignal: "yellow",
+    healthReasoning: "Three open PROVES gaps, decision-maker invisible, and pricing about to go out before decision criteria are explicit. Same shape as a recent loss — but the deadline and inbound referral are working in your favor.",
+    topThreeMoves: [
+      { rank: 1, move: "Get Rob on a 15-min intro call before Monday's pricing email goes out", why: "Closes Stakeholders + Decision Criteria gaps. Mirrors what Conor did at Westborough.", fromIntelligence: "playbook" },
+      { rank: 2, move: "Open Monday's demo with the decision-criteria question — not the product walkthrough", why: "Loss pattern from Apex Adventures was pricing-before-criteria. Don't repeat it.", fromIntelligence: "behavioral" },
+      { rank: 3, move: "Ping Chris Jourdain about Coastal Hockey 501c3 quote structure before sending pricing", why: "He closed almost exactly this configuration 68 days ago.", fromIntelligence: "orgWisdom" }
+    ],
+    whatChangedSinceLastTouch: "First read on this deal post-discovery. Next read after Monday's demo will calibrate against new signals."
+  }
+};
+
+function loadSample() {
+  const pa = $('paste-area');
+  pa.value = JSON.stringify(SAMPLE_PAYLOAD, null, 2);
+  pa.dispatchEvent(new Event('input', { bubbles: true }));
+  toast('Sample loaded — pick an output to preview', 'success');
+  // scroll the outputs grid into view
+  document.querySelector('.outputs-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Wire up the sample button
+const sampleBtn = $('btn-sample');
+if (sampleBtn) sampleBtn.addEventListener('click', loadSample);
+
+showView('home');
+</script>
+</body>
+</html>
